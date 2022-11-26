@@ -1,0 +1,98 @@
+<!--<div class="wrapper">-->
+  <div class="restaurant__container">
+    <div class="restaurant__info">
+
+      <section class="intro" [style]="{'background-image': 'url(' + restaurant?.image +')'}">
+        <div class="wrapper">
+          <div class="intro-background">
+            <h1 class="intro__title">
+              {{restaurant?.name}}
+            </h1>
+            <p class="intro__subtitle">
+              {{restaurant?.description}}
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <div *ngIf="currentDishes.length != 0 || currentDrinks.length != 0; else inDev">
+        <section class="menus">
+          <div class="restaurants__wrap">
+            <h2 class="restaurants__title">
+              Добро пожаловать в рессторан {{restaurant?.name}}
+            </h2>
+            <div class="restaurant__menu">
+              <h1 class="menu__title">Меню блюд</h1>
+<!--              <button class="btn" (click)="sortedDishes = currentDishes">SHOW ALL</button>-->
+              <div class="menu__categories-container">
+                <button class="btn" *ngFor="let dishCategory of dishCategories()" (click)="sortDishes(dishCategory)">{{dishCategory}}</button>
+              </div>
+              <div class="menu__dish-drink-cards">
+                <div class="menu__dish-drink-card">
+                  <ul class="menu__dish-drink-list" *ngFor="let dish of sortedDishes; let i = index">
+                    <li class="item-title">{{dish.name}}</li>
+                    <li><b>Цена: </b>{{dish.price}}</li>
+                    <li><b>Вес: </b>{{dish.weight}}</li>
+                    <li class="last-item"><b>Калории: </b>{{dish.calories}}</li>
+                    <li class="inc-dec__item">
+                      <button class="btn btn-inc-dec" [disabled]="sortedDishes[i].amount == 0" (click)="decValDish(i)">-</button>
+                      <input class="input-to-basket" type="text" [(ngModel)]="sortedDishes[i].amount">
+                      <button class="btn btn-inc-dec" (click)="incValDish(i)">+</button>
+                    </li>
+                    <li><button class="btn btn-to-basket">В корзину</button></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="menus">
+          <div class="restaurants__wrap" style="
+          border-top-left-radius: 10px;
+          border-top-right-radius: 10px;">
+            <div class="restaurant__menu">
+              <h1 class="menu__title" style="margin-top: 40px">Меню напитков</h1>
+              <div class="menu__categories-container">
+                <button class="btn" *ngFor="let drinkCategory of drinkCategories()" (click)="sortDrinks(drinkCategory)">{{drinkCategory}}</button>
+              </div>
+              <div class="menu__dish-drink-cards">
+                <div class="menu__dish-drink-card">
+                  <ul class="menu__dish-drink-list" *ngFor="let drink of sortedDrinks; let j = index">
+                    <li class="item-title">{{drink.name}}</li>
+                    <li><b>Описание: </b>{{drink.description}}</li>
+                    <li><b>Цена: </b>{{drink.price}}</li>
+                    <li><b>Объем: </b>{{drink.volume}}</li>
+                    <li class="last-item"><b>Цена за бутылку: </b>{{drink.priceOfBottle}}</li>
+                    <li class="inc-dec__item">
+                      <button class="btn btn-inc-dec" [disabled]="sortedDrinks[j].amount == 0" (click)="decValDrink(j)">-</button>
+                      <input class="input-to-basket" type="text" [(ngModel)]="sortedDrinks[j].amount">
+                      <button class="btn btn-inc-dec" (click)="incValDrink(j)">+</button>
+                    </li>
+                    <li><button class="btn btn-to-basket">В корзину</button></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <ng-template #inDev>
+        <section class="menus">
+          <div class="restaurants__wrap">
+            <h2 class="restaurants__title">
+              Добро пожаловать в рессторан {{restaurant?.name}}
+            </h2>
+            <div class="restaurant__menu">
+              <h1 class="menu__title">В разработке</h1>
+            </div>
+          </div>
+        </section>
+      </ng-template>
+
+
+<!--      <button class="btn" style="display: inline-block">Редактировать информацию</button>-->
+    </div>
+  </div>
+<!--</div>-->

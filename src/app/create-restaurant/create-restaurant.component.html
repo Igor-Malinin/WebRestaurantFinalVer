@@ -1,0 +1,78 @@
+<div class="wrapper">
+  <div class="create__rest-form">
+    <button class="btn btn-go-back" type="button" routerLink="/restaurants">Назад</button>
+    <form class="create__form" [formGroup]="formCreateRest" (ngSubmit)="submit()">
+      <h1 class="create__title">Создание нового ресторана</h1>
+      <div class="create__form-control">
+        <input type="text" name="rName" class="create__input" placeholder="Имя ресторана" formControlName="name">
+        <div
+          *ngIf="formCreateRest.get('name')?.invalid && formCreateRest.get('name')?.touched"
+          class="validation"
+        >
+          <small>Поле не может быть пустым</small>
+        </div>
+      </div>
+      <div class="create__form-control">
+        <input type="text" name="rAddress" class="create__input" placeholder="Адрес ресторана" formControlName="address">
+        <div
+          *ngIf="formCreateRest.get('address')?.invalid && formCreateRest.get('address')?.touched"
+          class="validation"
+        >
+          <small>Поле не может быть пустым</small>
+        </div>
+      </div>
+      <div class="create__form-control">
+        <input type="text" name="rAmountOfPlaces" class="create__input" placeholder="Количество посадочных мест" formControlName="amountOfPlaces">
+        <div
+          *ngIf="formCreateRest.get('name')?.invalid && formCreateRest.get('name')?.touched"
+          class="validation"
+        >
+          <small>Поле не может быть пустым</small>
+        </div>
+      </div>
+
+
+
+      <h1 class="create__title">Меню:</h1>
+      <div formArrayName="dishes">
+        <h1 class="create__title">Блюда:</h1>
+        <button class="btn add-btn" type="button" (click)="addDish()">Добавить блюдо</button>
+        <div *ngFor="let dish of dishes.controls; let i = index">
+          <div class="new-dish-drink" [formGroupName]="i">
+            <div class="new-dish-drink-flex-inputs">
+              <input formControlName="name" placeholder="Название блюда" class="new-dish-drink__input">
+              <input formControlName="category" placeholder="Категория блюда" class="new-dish-drink__input">
+              <input formControlName="description" placeholder="Описание блюда" class="new-dish-drink__input">
+              <input formControlName="price" placeholder="Цена блюда" class="new-dish-drink__input">
+              <input formControlName="weight" placeholder="Вес блюда" class="new-dish-drink__input">
+              <input formControlName="calories" placeholder="Калорийность блюда" class="new-dish-drink__input">
+            </div>
+            <button class="btn" (click)="deleteDish(i)">Удалить блюдо</button>
+          </div>
+        </div>
+      </div>
+
+      <div formArrayName="drinks">
+        <h1 class="create__title">Напитки:</h1>
+        <button class="btn add-btn" type="button" (click)="addDrink()">Добавить напиток</button>
+        <div *ngFor="let drink of drinks.controls; let i = index">
+          <div class="new-dish-drink" [formGroupName]="i">
+            <div class="new-dish-drink-flex-inputs">
+              <input formControlName="name" placeholder="Название напитка" class="new-dish-drink__input">
+              <input formControlName="category" placeholder="Категория напитка" class="new-dish-drink__input">
+              <input formControlName="description" placeholder="Описание напитка" class="new-dish-drink__input">
+              <input formControlName="price" placeholder="Цена напитка" class="new-dish-drink__input">
+              <input formControlName="volume" placeholder="Объем напитка" class="new-dish-drink__input">
+              <input formControlName="priceOfBottle" placeholder="Цена бутылки" class="new-dish-drink__input">
+            </div>
+            <button class="btn" (click)="deleteDrink(i)">Удалить напиток</button>
+          </div>
+        </div>
+      </div>
+
+      <button class="btn create__btn" type="submit" >Создать</button>
+<!--      <button class="btn create__btn" type="submit" [disabled]="formCreateRest.invalid">Создать</button>-->
+
+    </form>
+  </div>
+</div>

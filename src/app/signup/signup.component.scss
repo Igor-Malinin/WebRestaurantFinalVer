@@ -1,0 +1,82 @@
+@use "src/styles";
+
+.reg__client-form {
+  margin-top: 200px
+}
+.reg__form {
+  text-align: center;
+  padding: 40px 60px;
+  margin: 0 60px;
+  margin-bottom: 20px;
+  border: 2px solid styles.$border-color-superlightgrey;
+  border-radius: 5px;
+  box-shadow: inset 0 0 20px 6px styles.$back-color-dark;
+  background: styles.$back-color-light;
+}
+.btn-go-back {
+  margin-bottom: 30px;
+  margin-left: 2px;
+}
+.reg__title {
+  display: inline-block;
+  font-size: 26px;
+  font-weight: bold;
+  text-align: center;
+  padding: 5px 0;
+  margin: 0 auto 40px;
+}
+.reg__form-control {
+  margin-bottom: 20px;
+}
+.reg__input {
+  width: 100%;
+  font-size: 18px;
+  padding: 10px;
+  color: styles.$text-color-light;
+  &.ng-invalid.ng-touched {
+    border-top: 2px solid styles.$border-color-lightgrey;
+    border-bottom: 2px solid styles.$border-color-lightgrey;
+    border-right: 2px solid styles.$danger-color;
+    border-left: 2px solid styles.$danger-color;
+    background-color: rgba(253, 104, 104, 0.05);
+  }
+  &.ng-valid.ng-touched {
+    border-top: 2px solid styles.$border-color-lightgrey;
+    border-bottom: 2px solid styles.$border-color-lightgrey;
+    border-right: 2px solid styles.$valid-color;
+    border-left: 2px solid styles.$valid-color;
+    background-color: rgba(170, 255, 142, 0.05);
+  }
+  .passrepeat {
+    border-top: 2px solid styles.$border-color-lightgrey;
+    border-bottom: 2px solid styles.$border-color-lightgrey;
+    border-right: 2px solid styles.$danger-color;
+    border-left: 2px solid styles.$danger-color;
+    background-color: rgba(253, 104, 104, 0.05);
+  }
+}
+
+.role__select {
+  &.ng-invalid.ng-touched {
+    border-top: 2px solid styles.$border-color-lightgrey;
+    border-bottom: 2px solid styles.$border-color-lightgrey;
+    border-right: 2px solid styles.$danger-color;
+    border-left: 2px solid styles.$danger-color;
+    background-color: rgba(253, 104, 104, 0.05);
+  }
+  &.ng-valid.ng-touched {
+    border-top: 2px solid styles.$border-color-lightgrey;
+    border-bottom: 2px solid styles.$border-color-lightgrey;
+    border-right: 2px solid styles.$valid-color;
+    border-left: 2px solid styles.$valid-color;
+    background-color: rgba(170, 255, 142, 0.05);
+  }
+}
+.validation {
+  margin-top: 10px;
+  color: styles.$danger-color;
+}
+.reg__btn {
+
+}
+

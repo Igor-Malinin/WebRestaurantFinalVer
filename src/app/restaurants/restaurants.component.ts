@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, HostListener, OnInit} from '@angular/core';
+import {Restaurant} from "../entity/Restaurant";
+import {RestaurantsService} from "../services/restaurants.service";
 
 @Component({
   selector: 'app-restaurants',
@@ -7,9 +9,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RestaurantsComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    public restaurantsService: RestaurantsService
+  ) {
+  }
 
   ngOnInit(): void {
+
   }
+
+
 
 }
