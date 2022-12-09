@@ -32,7 +32,7 @@
           <p class="restaurants__card-desc">
             {{rest.description}}
           </p>
-          <a href="#" class="restaurants__card-more">
+          <a class="restaurants__card-more" [routerLink]="['/restaurants/', rest.id]">
             Подробнее
           </a>
         </div>

@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, HostListener, OnInit} from '@angular/core';
 import {ActivatedRoute, Params} from "@angular/router";
 import {Restaurant} from "../entity/Restaurant";
 import {RestaurantsService} from "../services/restaurants.service";
 import {MenuService} from "../services/menu.service";
 import {Dish} from "../entity/Dish";
 import {Drink} from "../entity/Drink";
+import {CookieService} from "ngx-cookie-service";
 
 @Component({
   selector: 'app-restaurant',
@@ -23,14 +24,17 @@ export class RestaurantComponent implements OnInit {
   sortedDrinks: Drink[] = []
   amount: number[] = []
   empty: boolean = false
+  role: string = ''
 
   constructor(
     private route: ActivatedRoute,
     public restaurantsService: RestaurantsService,
-    public menuService: MenuService
+    public menuService: MenuService,
+    private cookieService: CookieService
   ) { }
 
   ngOnInit(): void {
+    this.role = this.cookieService.get('role')
     this.route.params.subscribe({
       next: (params: Params) => {
         this.restaurantId = +params['id']
@@ -52,6 +56,16 @@ export class RestaurantComponent implements OnInit {
     this.drinksCategories.push(this.currentDrinks[0]?.category)
     this.amount.length = this.currentDishes.length + this.currentDrinks.length
     this.amount.fill(0)
+    window.scrollTo(0,0)
+  }
+
+  ngAfterViewInit() {
+    window.addEventListener("scroll", this.onWindowScroll, true)
+  }
+
+  @HostListener("window:scroll", ['$event'])
+  onWindowScroll() {
+    console.log(window.scrollY)
   }
 
   dishCategories() {

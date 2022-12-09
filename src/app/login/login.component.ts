@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {AuthService} from "../services/auth.service";
-
+import {CookieService} from "ngx-cookie-service";
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -8,12 +8,24 @@ import {AuthService} from "../services/auth.service";
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private authService: AuthService) { }
+  isAuthenticated: boolean = false
+  roles: string[] = ['Admin', 'Manager', 'Courier', 'Client']
+  username: string = ''
+  password: string = '';
+
+  constructor(
+    private authService: AuthService,
+    private cookieService: CookieService
+  ) { }
 
   ngOnInit(): void {
+    if (this.cookieService.check('isAuthenticated')) {
+      this.isAuthenticated = (this.cookieService.get('isAuthenticated') == 'OK')
+    }
+    console.log(this.username)
   }
 
-  login() {
-    this.authService.login()
+  onLoginClick() {
+    this.isAuthenticated = this.authService.login(this.username)
   }
 }

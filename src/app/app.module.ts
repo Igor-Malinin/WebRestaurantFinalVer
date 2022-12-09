@@ -13,6 +13,11 @@ import { CreateRestaurantComponent } from './create-restaurant/create-restaurant
 import {HttpClientModule} from "@angular/common/http";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import { SignupComponent } from './signup/signup.component';
+import { OrdersComponent } from './orders/orders.component';
+import { UserspageComponent } from './userspage/userspage.component';
+import { ReferenceComponent } from './reference/reference.component';
+import { ContactsComponent } from './contacts/contacts.component';
+import { CheckoutOrderComponent } from './checkout-order/checkout-order.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +28,12 @@ import { SignupComponent } from './signup/signup.component';
     LoginComponent,
     RestaurantComponent,
     CreateRestaurantComponent,
-    SignupComponent
+    SignupComponent,
+    OrdersComponent,
+    UserspageComponent,
+    ReferenceComponent,
+    ContactsComponent,
+    CheckoutOrderComponent
   ],
   imports: [
     BrowserModule,
@@ -31,7 +41,7 @@ import { SignupComponent } from './signup/signup.component';
     ReactiveFormsModule,
     AppRoutingModule,
     HttpClientModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

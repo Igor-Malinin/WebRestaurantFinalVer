@@ -53,17 +53,19 @@ $hover-color-dark: #3d3d3d;
 $hover-color-wood: #8a4500;
 $danger-color: #fd6868;
 $valid-color: #aaff8e;
+$header-color: #343434;
+$data-color: #424242;
 
 
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
 del, dfn, em, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
+small, strike, tt, var,
 center,
 dl, dt, dd, ol, ul, li,
 fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
+table, caption, tbody, tfoot, thead,
 article, aside, canvas, details, embed,
 figure, figcaption, footer, header, hgroup,
 menu, nav, output, ruby, section, summary,
@@ -502,6 +504,7 @@ input {
   background-color: $back-color-dark;
   border-radius: 3px;
   color: $text-color-light;
+  color-scheme: dark;
   border-top: 2px solid $border-color-lightgrey;
   border-bottom: 2px solid $border-color-lightgrey;
   border-left: 2px solid $back-color-light;
@@ -552,6 +555,10 @@ select:focus {
   border-bottom-color: rgba(255, 174, 0, 0.5);
   border-left-color: 2px solid $back-color-dark;
   border-right-color: 2px solid $back-color-dark;
+}
+
+.paige__container {
+  margin-top: 220px;
 }
 
 

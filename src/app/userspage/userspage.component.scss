@@ -1,0 +1,159 @@
+@use "src/styles";
+
+.control-buttons {
+  display: flex;
+  justify-content: space-around;
+  .search-elements {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    .search-field {
+      width: 300px;
+      background-color: styles.$back-color-light;
+      border-right: styles.$back-color-dark;
+      border-left: styles.$back-color-dark;
+      border-radius: 2px;
+    }
+  }
+}
+
+.users__table {
+  margin-top: 40px;
+  margin-bottom: 100px;
+  border-collapse: separate;
+  border: 1px solid styles.$border-color-superlightgrey;
+  border-radius: 5px;
+  td, th {
+    padding: 10px;
+    text-align: center;
+    border: 2px solid styles.$border-color-superlightgrey;
+  }
+  th {
+    background-color: styles.$header-color;
+  }
+  td {
+    background-color: styles.$data-color;
+
+  }
+  th:first-child {
+    border-top-left-radius: 4px;
+  }
+  th:last-child {
+    border-top-right-radius: 4px;
+  }
+  //.edit-delete-links {
+  //  display: flex;
+  //  flex-direction: column;
+  //}
+  .link-edit__user {
+    display: inline-block;
+    color: #e1b667;
+    text-shadow: 0 0 4px #e1b667;
+    cursor: pointer;
+    &:hover {
+      color: #a68c50;
+      text-shadow: none;
+    }
+    &:active {
+      color: #776246;
+    }
+  }
+  .link-delete__user {
+    display: inline-block;
+    color: #ec7979;
+    text-shadow: 0 0 4px #ec7979;
+    cursor: pointer;
+    &:hover {
+      color: #b75f5f;
+      text-shadow: none;
+    }
+    &:active {
+      color: #7c4040;
+    }
+  }
+}
+
+.table_row:last-child td:first-child {
+  border-bottom-left-radius: 4px;
+}
+.table_row:last-child td:last-child {
+  border-bottom-right-radius: 4px;
+}
+
+.reg__form {
+  //width: 100%;
+  text-align: center;
+  padding: 40px 60px 30px 60px;
+  margin: 40px 60px 0 60px;
+  margin-bottom: 20px;
+  border: 2px solid styles.$border-color-superlightgrey;
+  border-radius: 5px;
+  box-shadow: inset 0 0 20px 6px styles.$back-color-dark;
+  background: styles.$back-color-light;
+}
+
+.reg__form-flex {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.reg__form-control {
+  width: 250px;
+}
+
+.reg__input {
+  width: 100%;
+  font-size: 18px;
+  padding: 10px;
+  color: styles.$text-color-light;
+  &.ng-invalid.ng-touched {
+    border-top: 2px solid styles.$border-color-lightgrey;
+    border-bottom: 2px solid styles.$border-color-lightgrey;
+    border-right: 2px solid styles.$danger-color;
+    border-left: 2px solid styles.$danger-color;
+    background-color: rgba(253, 104, 104, 0.05);
+  }
+  &.ng-valid.ng-touched {
+    border-top: 2px solid styles.$border-color-lightgrey;
+    border-bottom: 2px solid styles.$border-color-lightgrey;
+    border-right: 2px solid styles.$valid-color;
+    border-left: 2px solid styles.$valid-color;
+    background-color: rgba(170, 255, 142, 0.05);
+  }
+}
+
+.role__select {
+  &.ng-invalid.ng-touched {
+    border-top: 2px solid styles.$border-color-lightgrey;
+    border-bottom: 2px solid styles.$border-color-lightgrey;
+    border-right: 2px solid styles.$danger-color;
+    border-left: 2px solid styles.$danger-color;
+    background-color: rgba(253, 104, 104, 0.05);
+  }
+  &.ng-valid.ng-touched {
+    border-top: 2px solid styles.$border-color-lightgrey;
+    border-bottom: 2px solid styles.$border-color-lightgrey;
+    border-right: 2px solid styles.$valid-color;
+    border-left: 2px solid styles.$valid-color;
+    background-color: rgba(170, 255, 142, 0.05);
+  }
+}
+.validation {
+  margin-top: 10px;
+  color: styles.$danger-color;
+}
+
+@media (max-width: 980px) {
+  .reg__form-control {
+    width: 210px;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .reg__form-control {
+    width: 180px;
+  }
+}

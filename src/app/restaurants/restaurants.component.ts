@@ -1,6 +1,7 @@
 import {Component, HostListener, OnInit} from '@angular/core';
 import {Restaurant} from "../entity/Restaurant";
 import {RestaurantsService} from "../services/restaurants.service";
+import {CookieService} from "ngx-cookie-service";
 
 @Component({
   selector: 'app-restaurants',
@@ -9,13 +10,16 @@ import {RestaurantsService} from "../services/restaurants.service";
 })
 export class RestaurantsComponent implements OnInit {
 
+  role: string = ''
+
   constructor(
-    public restaurantsService: RestaurantsService
+    public restaurantsService: RestaurantsService,
+    private cookieService: CookieService
   ) {
   }
 
   ngOnInit(): void {
-
+    this.role = this.cookieService.get('role')
   }
 
 

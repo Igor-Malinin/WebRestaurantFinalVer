@@ -18,13 +18,27 @@
   border-radius: 10px;
   margin-bottom: 60px;
 }
+
+.title-with-btn-edit {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+  //border: 2px solid black;
+  margin-bottom: 22px;
+}
+
 .intro__title{
+  display: inline-block;
   max-width: 580px;
   font-weight: 500;
   font-size: 50px;
   line-height: 60px;
   color: white;
-  margin-bottom: 22px;
+}
+
+.btn-edit {
+  width: 150px;
+  height: 65px;
 }
 
 .intro__subtitle{

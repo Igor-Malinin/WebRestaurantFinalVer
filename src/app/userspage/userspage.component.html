@@ -1,0 +1,160 @@
+<div class="wrapper">
+  <div class="paige__container">
+    <div class="control-buttons">
+      <button class="btn" type="button" (click)="regToggle = !regToggle">
+        <small *ngIf="!regToggle">Добавить пользователя</small>
+        <small *ngIf="regToggle">Отменить</small>
+      </button>
+      <div class="search-elements">
+        <input type="text" class="search-field">
+        <button class="btn">Поиск</button>
+      </div>
+<!--      <button class="btn">Изменить пользователя</button>-->
+<!--      <button class="btn">Удалить пользователя</button>-->
+    </div>
+
+    <form class="reg__form" [formGroup]="formUserReg" (ngSubmit)="submit()" *ngIf="regToggle">
+      <div class="reg__form-flex">
+        <div class="reg__form-control">
+          <input type="text" name="surname" class="reg__input" placeholder="Фамилия" formControlName="surname">
+          <div
+            *ngIf="formUserReg.get('surname')?.invalid && formUserReg.get('surname')?.touched"
+            class="validation"
+          >
+            <small>Поле не может быть пустым</small>
+          </div>
+        </div>
+        <div class="reg__form-control">
+          <input type="text" name="cName" class="reg__input" placeholder="Имя" formControlName="name">
+          <div
+            *ngIf="formUserReg.get('name')?.invalid && formUserReg.get('name')?.touched"
+            class="validation"
+          >
+            <small>Поле не может быть пустым</small>
+          </div>
+        </div>
+        <div class="reg__form-control">
+          <input type="text" name="cPat" class="reg__input" placeholder="Отчество" formControlName="patronymic">
+          <div
+            *ngIf="formUserReg.get('patronymic')?.invalid && formUserReg.get('patronymic')?.touched"
+            class="validation"
+          >
+            <small>Поле не может быть пустым</small>
+          </div>
+        </div>
+        <div class="reg__form-control">
+          <input type="text" name="telephoneNumber" class="reg__input" placeholder="Телефон" formControlName="telephoneNumber">
+          <div
+            *ngIf="formUserReg.get('telephoneNumber')?.invalid && formUserReg.get('telephoneNumber')?.touched"
+            class="validation"
+          >
+            <small *ngIf="formUserReg.get('telephoneNumber')?.errors?.['required']">
+              Поле не может быть пустым
+            </small>
+            <small *ngIf="formUserReg.get('telephoneNumber')?.hasError('minlength')">
+              Введите телефон длиной {{formUserReg.get('telephoneNumber')?.errors?.['minlength'].requiredLength}} символов.
+              Вы ввели {{formUserReg.get('telephoneNumber')?.errors?.['minlength'].actualLength}}.
+            </small>
+            <small *ngIf="formUserReg.get('telephoneNumber')?.hasError('maxlength')">
+              Введите телефон длиной {{formUserReg.get('telephoneNumber')?.errors?.['maxlength'].requiredLength}} символов.
+              Вы ввели {{formUserReg.get('telephoneNumber')?.errors?.['maxlength'].actualLength}}.
+            </small>
+          </div>
+        </div>
+        <div class="reg__form-control">
+          <input type="text" name="address" class="reg__input" placeholder="Адрес" formControlName="address">
+          <div
+            *ngIf="formUserReg.get('address')?.invalid && formUserReg.get('address')?.touched"
+            class="validation"
+          >
+            <small>Поле не может быть пустым</small>
+          </div>
+        </div>
+        <div class="reg__form-control">
+          <select class="role__select" name="roles" id="role-select" formControlName="role">
+            <option class="role__option" value=""> Выберите роль </option>
+            <option class="role__option" value="Admin">Администратор</option>
+            <option class="role__option" value="Manager">Менеджер</option>
+            <option class="role__option" value="Courier">Курьер</option>
+            <option class="role__option" value="Client">Клиент</option>
+          </select>
+          <div
+            *ngIf="formUserReg.get('role')?.invalid && formUserReg.get('role')?.touched"
+            class="validation"
+          >
+            <small>Роль не назначена, выберите роль</small>
+          </div>
+        </div>
+        <div class="reg__form-control">
+          <input type="text" name="email" class="reg__input" placeholder="E-mail" formControlName="email">
+          <div
+            *ngIf="formUserReg.get('email')?.invalid && formUserReg.get('email')?.touched"
+            class="validation"
+          >
+            <small *ngIf="formUserReg.get('email')?.errors?.['required']">
+              Поле не может быть пустым
+            </small>
+            <small *ngIf="formUserReg.get('email')?.errors?.['email']">
+              Введите корректный E-mail
+            </small>
+          </div>
+        </div>
+        <div class="reg__form-control">
+          <input type="text" name="cLog" class="reg__input" placeholder="Логин" formControlName="login">
+          <div
+            *ngIf="formUserReg.get('login')?.invalid && formUserReg.get('login')?.touched"
+            class="validation"
+          >
+            <small>Поле не может быть пустым</small>
+          </div>
+        </div>
+        <div class="reg__form-control">
+          <input type="text" name="password" class="reg__input" placeholder="Пароль" formControlName="password">
+          <div
+            *ngIf="formUserReg.get('password')?.invalid && formUserReg.get('password')?.touched"
+            class="validation"
+          >
+            <small *ngIf="formUserReg.get('password')?.errors?.['required']">
+              Поле не может быть пустым
+            </small>
+            <small *ngIf="formUserReg.get('password')?.hasError('minlength')">
+              Введите пароль длиной хотя бы {{formUserReg.get('password')?.errors?.['minlength'].requiredLength}} символа
+              Вы ввели {{formUserReg.get('password')?.errors?.['minlength'].actualLength}}
+            </small>
+            <small *ngIf="formUserReg.get('password')?.hasError('maxlength')">
+              Введите пароль длиной не более {{formUserReg.get('password')?.errors?.['maxlength'].requiredLength}} символов
+              Вы ввели {{formUserReg.get('password')?.errors?.['maxlength'].actualLength}}
+            </small>
+          </div>
+        </div>
+      </div>
+      <button class="btn reg__btn" type="submit" [disabled]="formUserReg.invalid">Зарегистрировать</button>
+    </form>
+
+    <table class="users__table">
+      <tr class="table_row">
+        <th>ФИО</th>
+        <th>Роль</th>
+        <th>Телефон</th>
+        <th>Адрес</th>
+        <th>Логин</th>
+        <th>Email</th>
+        <th>Пароль</th>
+        <th>Изменение  Удаление</th>
+      </tr>
+      <tr class="table_row" *ngFor="let user of users">
+        <td>{{user.surname}} {{user.name}} {{user.patronymic}}</td>
+        <td>{{user.role}}</td>
+        <td>{{user.telephoneNumber}}</td>
+        <td>{{user.address}}</td>
+        <td>{{user.login}}</td>
+        <td>{{user.email}}</td>
+        <td>{{user.password}}</td>
+        <td class="edit-delete-links">
+          <a class="link-edit__user" style="margin-bottom: 15px">Изменить</a>
+          <a class="link-delete__user" (click)="deleteUser(user.id)">Удалить</a>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>

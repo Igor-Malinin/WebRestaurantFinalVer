@@ -1,0 +1,22 @@
+@use "src/styles";
+
+.reference__box {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
+  border: 2px solid styles.$border-color-superlightgrey;
+  border-radius: 5px;
+  box-shadow: inset 0 0 20px 6px styles.$back-color-dark;
+  background: styles.$back-color-light;
+  margin-bottom: 40px;
+}
+
+.reference_title {
+  font-size: 24px;
+  align-self: center;
+}
+
+.reference_text {
+  text-align: center;
+}

@@ -5,9 +5,12 @@
       <section class="intro" [style]="{'background-image': 'url(' + restaurant?.image +')'}">
         <div class="wrapper">
           <div class="intro-background">
-            <h1 class="intro__title">
-              {{restaurant?.name}}
-            </h1>
+            <div class="title-with-btn-edit">
+              <h1 class="intro__title">
+                {{restaurant?.name}}
+              </h1>
+              <button class="btn btn-edit" *ngIf="role == 'Admin'">Редактировать информацию</button>
+            </div>
             <p class="intro__subtitle">
               {{restaurant?.description}}
             </p>
@@ -19,7 +22,7 @@
         <section class="menus">
           <div class="restaurants__wrap">
             <h2 class="restaurants__title">
-              Добро пожаловать в рессторан {{restaurant?.name}}
+              Добро пожаловать в ресторан {{restaurant?.name}}
             </h2>
             <div class="restaurant__menu">
               <h1 class="menu__title">Меню блюд</h1>
@@ -92,7 +95,6 @@
       </ng-template>
 
 
-<!--      <button class="btn" style="display: inline-block">Редактировать информацию</button>-->
     </div>
   </div>
 <!--</div>-->

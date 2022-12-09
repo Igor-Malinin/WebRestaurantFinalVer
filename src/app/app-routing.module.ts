@@ -7,6 +7,10 @@ import {LoginComponent} from "./login/login.component";
 import {RestaurantComponent} from "./restaurant/restaurant.component";
 import {CreateRestaurantComponent} from "./create-restaurant/create-restaurant.component";
 import {SignupComponent} from "./signup/signup.component";
+import {OrdersComponent} from "./orders/orders.component";
+import {UserspageComponent} from "./userspage/userspage.component";
+import {ReferenceComponent} from "./reference/reference.component";
+import {ContactsComponent} from "./contacts/contacts.component";
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -15,6 +19,10 @@ const routes: Routes = [
   {path: 'createrestaurant', component: CreateRestaurantComponent},
   {path: 'login', component: LoginComponent},
   {path: 'signup', component: SignupComponent},
+  {path: 'orders', component: OrdersComponent},
+  {path: 'userspage', component: UserspageComponent},
+  {path: 'reference', component: ReferenceComponent},
+  {path: 'contacts', component: ContactsComponent},
 
   {path: 'error', component: ErrorPageComponent},
   {path: '**', redirectTo: '/error'}

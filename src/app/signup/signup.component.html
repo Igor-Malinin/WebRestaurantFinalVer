@@ -23,6 +23,15 @@
         </div>
       </div>
       <div class="reg__form-control">
+        <input type="text" name="cPat" class="reg__input" placeholder="Отчество" formControlName="patronymic">
+        <div
+          *ngIf="formUserReg.get('patronymic')?.invalid && formUserReg.get('patronymic')?.touched"
+          class="validation"
+        >
+          <small>Поле не может быть пустым</small>
+        </div>
+      </div>
+      <div class="reg__form-control">
         <input type="text" name="telephoneNumber" class="reg__input" placeholder="Телефон" formControlName="telephoneNumber">
         <div
           *ngIf="formUserReg.get('telephoneNumber')?.invalid && formUserReg.get('telephoneNumber')?.touched"
@@ -51,21 +60,6 @@
         </div>
       </div>
       <div class="reg__form-control">
-        <select class="role__select" name="roles" id="role-select" formControlName="role">
-          <option class="role__option" value=""> Выберите роль </option>
-          <option class="role__option" value="Admin">Администратор</option>
-          <option class="role__option" value="Manager">Менеджер</option>
-          <option class="role__option" value="Courier">Курьер</option>
-          <option class="role__option" value="Client">Клиент</option>
-        </select>
-        <div
-          *ngIf="formUserReg.get('role')?.invalid && formUserReg.get('role')?.touched"
-          class="validation"
-        >
-          <small>Роль не назначена, выберите роль</small>
-        </div>
-      </div>
-      <div class="reg__form-control">
         <input type="text" name="email" class="reg__input" placeholder="E-mail" formControlName="email">
         <div
           *ngIf="formUserReg.get('email')?.invalid && formUserReg.get('email')?.touched"
@@ -77,6 +71,15 @@
           <small *ngIf="formUserReg.get('email')?.errors?.['email']">
             Введите корректный E-mail
           </small>
+        </div>
+      </div>
+      <div class="reg__form-control">
+        <input type="text" name="cLog" class="reg__input" placeholder="Логин" formControlName="login">
+        <div
+          *ngIf="formUserReg.get('login')?.invalid && formUserReg.get('login')?.touched"
+          class="validation"
+        >
+          <small>Поле не может быть пустым</small>
         </div>
       </div>
       <div class="reg__form-control">
@@ -99,7 +102,6 @@
         </div>
       </div>
       <div class="reg__form-control">
-<!--        (focusout)="showCon()"-->
         <input type="text" name="passwordRepeat" class="reg__input" placeholder="Повторите пароль" formControlName="passwordRepeat">
         <div
           *ngIf="formUserReg.get('passwordRepeat')?.invalid && formUserReg.get('passwordRepeat')?.touched"
@@ -113,8 +115,8 @@
           </small>
         </div>
       </div>
-      <button class="btn" type="button" (click)="showCon()">show</button>
       <button class="btn reg__btn" type="submit" [disabled]="formUserReg.invalid">Зарегистрировать</button>
+<!--      <button class="btn" type="button" (click)="showCon()">show</button>-->
 
     </form>
   </div>

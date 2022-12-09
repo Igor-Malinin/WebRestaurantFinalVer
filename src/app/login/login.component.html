@@ -1,11 +1,13 @@
-<div class="wrapper">
-  <div class="login__container">
-    <div class="login__box">
-      <h1 class="login__header">Вход</h1>
-      <input type="text" class="login__input" placeholder="Email">
-      <input type="password" class="login__input" placeholder="Пароль">
-      <button class="btn" (click)="login()">Войти</button>
-      <button class="btn" routerLink="/signup">Регистрация</button>
+<div class="back-img">
+  <div class="wrapper">
+    <div class="login__container">
+      <div class="login__box">
+        <h1 class="login__header">Вход</h1>
+        <input type="text" class="login__input" placeholder="Email" [(ngModel)]="username">
+        <input type="password" class="login__input" placeholder="Пароль" [(ngModel)]="password">
+        <button class="btn reg-log-btn" (click)="onLoginClick()">Войти</button>
+        <button class="btn reg-log-btn" routerLink="/signup">Регистрация</button>
+      </div>
     </div>
   </div>
 </div>

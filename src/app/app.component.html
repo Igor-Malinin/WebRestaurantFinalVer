@@ -13,15 +13,15 @@
           <li class="header__item">
             <a [routerLink]="['/']" class="header__link">Главная</a>
           </li>
-<!--          <li class="dot">&#8226;</li>-->
           <li class="header__item">
             <a [routerLink]="['/restaurants']" class="header__link">Выбор ресторана</a>
           </li>
-<!--          <li class="dot">&#8226;</li>-->
-          <li class="header__item">
-            <a href="#" class="header__link">Доставка</a>
+          <li class="header__item" *ngIf="role == 'Admin'">
+            <a href="#" class="header__link" [routerLink]="['/userspage']">Пользователи</a>
           </li>
-<!--          <li class="dot">&#8226;</li>-->
+          <li class="header__item" *ngIf="isAuth()">
+            <a href="#" class="header__link" [routerLink]="['/orders']">Заказы</a>
+          </li>
           <li class="header__item" *ngIf="!isAuth(); else authorized">
             <a [routerLink]="['/login']" class="header__link">Вход</a>
           </li>
@@ -29,7 +29,7 @@
             <li class="header__item">
               <div class="authorized-header-basket">
                 <button class="btn btn-logout" (click)="logout()">Выйти</button>
-                <a class="basket-link">Корзина <img class="basket-img" src="assets/images/basket_icon.png" alt="K"></a>
+<!--                <a class="basket-link">Корзина <img class="basket-img" src="assets/images/basket_icon.png" alt="K"></a>-->
               </div>
             </li>
           </ng-template>
@@ -41,3 +41,21 @@
 <!-- Header end -->
 
 <router-outlet></router-outlet>
+
+<footer>
+  <div class="footer-container">
+    <div class="info-about-devs">
+      <img src="favicon.ico" alt="" class="info-logo">
+      <h2 class="info-ref btn" routerLink="/reference">Справка</h2>
+      <h2 class="info-ref btn" routerLink="/contacts">Контакты</h2>
+      <div class="socials">
+        <h2 class="info-ref title-i-r">Социальные сети:</h2>
+        <div class="social-icons">
+          <h2 class="info-ref"><img src="https://pngimg.com/uploads/vkontakte/vkontakte_PNG25.png" alt="vk" class="icons"></h2>
+          <h2 class="info-ref"><img src="https://cdn.optipic.io/site-102371/local/templates/stroyakustika/img/tg-icon.png" alt="telegram" class="icons" style="width: 40px"></h2>
+          <h2 class="info-ref"><img src="https://avatanplus.com/files/resources/original/56be426a8454f152d733702e.png" alt="youtube" class="icons"></h2>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
