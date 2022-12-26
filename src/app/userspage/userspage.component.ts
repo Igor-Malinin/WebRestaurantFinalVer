@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {UsersService} from "../services/users.service";
 import {User} from "../entity/User";
 import {FormBuilder, Validators} from "@angular/forms";
+import {Role} from "../entity/Role";
 
 @Component({
   selector: 'app-userspage',
@@ -22,48 +23,92 @@ export class UserspageComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.users = this.usersService.getUsers()
+    this.usersService.getUsers().subscribe({
+      next: (msg) => {
+        console.log(JSON.parse(String(msg.body)))
+        this.users = JSON.parse(String(msg.body))
+      },
+      error: (err) => {
+        console.log('error', err)
+      },
+      complete: () => {}
+    })
     console.log(this.users)
     this.formUserReg = this.fb.group({
       id: [null],
       surname: ['', Validators.required],
       name: ['', Validators.required],
-      patronymic: ['', Validators.required],
-      telephoneNumber: [null, [
+      telephone: [null,[
         Validators.required,
         Validators.minLength(this.telephoneLength),
         Validators.maxLength(this.telephoneLength)
       ]],
-      address: ['', Validators.required],
-      role: ['', Validators.required],
-      email: ['', [
+      password: ['',[
         Validators.required,
-        Validators.email
-      ]],
-      login: ['', Validators.required],
-      password: ['', [
-        Validators.required,
-        Validators.minLength(this.passLength - 6),
+        Validators.minLength(this.passLength-6),
         Validators.maxLength(this.passLength)
       ]],
+      address: ['', Validators.required],
+      myOrders: [null],
+      latitude: [null],
+      longitude: [null],
+      placeOfWork: [null],
+      role: ['', Validators.required],
+      // email: ['', [
+      //   Validators.required,
+      //   Validators.email
+      // ]],
+      working: [false]
     })
   }
 
   deleteUser(id: number) {
     this.usersService.deleteUser(id)
-    this.users = this.usersService.getUsers()
   }
 
   submit() {
     if(this.formUserReg.valid) {
       const newUserData = {...this.formUserReg.value}
-
-      newUserData.telephoneNumber = Number(newUserData.telephoneNumber)
-      // console.log(newUserData)
-      // window.location.reload()
-      this.usersService.addUser(newUserData)
+      let role = {
+        role: {
+          id: null,
+          roleName: newUserData.role
+        }
+      }
+      let editedRole = {...newUserData}
+      Object.keys(editedRole).forEach((key: any) => {
+        if (key == 'role')
+          delete editedRole[key]
+      })
+      editedRole = {...editedRole, ...role}
+      this.usersService.signupUser(editedRole).subscribe({
+        next: (msg) => {
+          console.log(msg)
+        },
+        error: (err) => {
+          console.log('error', err)
+        },
+        complete: () => {
+          setTimeout(() => {
+            window.location.reload()
+          }, 10)
+        }
+      })
+      console.log(editedRole)
       this.formUserReg.reset()
     }
+  }
+
+  getSome() {
+    this.usersService.getUsers().subscribe({
+      next: (msg) => {
+        console.log(msg)
+      },
+      error: (err) => {
+        console.log('error', err)
+      },
+      complete: () => {}
+    })
   }
 
 }

@@ -11,6 +11,7 @@ export class HomeComponent implements OnInit {
   constructor(public restaurantsService: RestaurantsService) { }
 
   ngOnInit(): void {
+    window.scrollTo(0,0)
   }
 
 }

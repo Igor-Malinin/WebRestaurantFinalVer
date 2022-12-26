@@ -1,6 +1,6 @@
 <div class="wrapper">
   <div class="orders-container">
-    <div class="orders-box-admin" *ngIf="role == 'Admin'">
+    <div class="orders-box-admin" *ngIf="role == 'admin' || role == 'manager'">
 
       <div class="create-order">
         <div class="control-elements">
@@ -14,87 +14,75 @@
           </div>
         </div>
         <div class="create-order__box" *ngIf="createOrdrTggl">
-          <form class="create-order__form" [formGroup]="formCreateOrder" (ngSubmit)="submit()">
-            <div class="create-order__form-control">
-              <select class="hallOrDev__select" name="hallOrDev" id="hallOrDev-select" formControlName="hallOrDev">
-                <option class="hallOrDev__option" value=""> Ресторан или доставка </option>
-                <option class="hallOrDev__option" value="Hall">Ресторан</option>
-                <option class="hallOrDev__option" value="Delivery">Доставка</option>
-              </select>
-              <div
-                *ngIf="formCreateOrder.get('hallOrDev')?.invalid && formCreateOrder.get('hallOrDev')?.touched"
-                class="validation"
-              >
-                <small>Выберите тип заказа</small>
-              </div>
-            </div>
+<!--          Form Hall-->
+          <form class="create-order__form" [formGroup]="formCreateOrderHall" (ngSubmit)="submit()" *ngIf="ordersToggle">
             <div class="form-elements">
+              <div class="create-order__form-control">
+                <input type="text" name="camountOfPlaces" class="create-ordr__input" placeholder="ФИ заказчика" formControlName="fio">
+                <div
+                  *ngIf="formCreateOrderHall.get('fio')?.invalid && formCreateOrderHall.get('fio')?.touched"
+                  class="validation"
+                >
+                  <small>Заполните поле</small>
+                </div>
+              </div>
               <div class="create-order__form-control">
                 <input type="text" name="camountOfPlaces" class="create-ordr__input" placeholder="Количество мест" formControlName="amountOfPlaces">
                 <div
-                  *ngIf="formCreateOrder.get('amountOfPlaces')?.invalid && formCreateOrder.get('amountOfPlaces')?.touched"
+                  *ngIf="formCreateOrderHall.get('amountOfPlaces')?.invalid && formCreateOrderHall.get('amountOfPlaces')?.touched"
                   class="validation"
                 >
                   <small>Заполните поле</small>
                 </div>
               </div>
               <div class="create-order__form-control">
-                <input type="text" name="cTable" class="create-ordr__input" placeholder="Стол" formControlName="table">
+                <input type="text" name="cTable" class="create-ordr__input" placeholder="Стол" formControlName="seatNumber">
                 <div
-                  *ngIf="formCreateOrder.get('table')?.invalid && formCreateOrder.get('table')?.touched"
+                  *ngIf="formCreateOrderHall.get('seatNumber')?.invalid && formCreateOrderHall.get('seatNumber')?.touched"
                   class="validation"
                 >
                   <small>Заполните поле</small>
                 </div>
               </div>
               <div class="create-order__form-control">
-                <input type="text" name="telephoneNumber" class="create-ordr__input" placeholder="Телефон" formControlName="telephoneNumber">
+                <input type="text" name="telephoneNumber" class="create-ordr__input" placeholder="Телефон" formControlName="telephone">
                 <div
-                  *ngIf="formCreateOrder.get('telephoneNumber')?.invalid && formCreateOrder.get('telephoneNumber')?.touched"
+                  *ngIf="formCreateOrderHall.get('telephone')?.invalid && formCreateOrderHall.get('telephone')?.touched"
                   class="validation"
                 >
-                  <small *ngIf="formCreateOrder.get('telephoneNumber')?.errors?.['required']">
+                  <small *ngIf="formCreateOrderHall.get('telephone')?.errors?.['required']">
                     Заполните поле
                   </small>
-                  <small *ngIf="formCreateOrder.get('telephoneNumber')?.hasError('minlength')">
-                    Введите телефон длиной {{formCreateOrder.get('telephoneNumber')?.errors?.['minlength'].requiredLength}} символов.
-                    Вы ввели {{formCreateOrder.get('telephoneNumber')?.errors?.['minlength'].actualLength}}.
+                  <small *ngIf="formCreateOrderHall.get('telephone')?.hasError('minlength')">
+                    Введите телефон длиной {{formCreateOrderHall.get('telephone')?.errors?.['minlength'].requiredLength}} символов.
+                    Вы ввели {{formCreateOrderHall.get('telephone')?.errors?.['minlength'].actualLength}}.
                   </small>
-                  <small *ngIf="formCreateOrder.get('telephoneNumber')?.hasError('maxlength')">
-                    Введите телефон длиной {{formCreateOrder.get('telephoneNumber')?.errors?.['maxlength'].requiredLength}} символов.
-                    Вы ввели {{formCreateOrder.get('telephoneNumber')?.errors?.['maxlength'].actualLength}}.
+                  <small *ngIf="formCreateOrderHall.get('telephone')?.hasError('maxlength')">
+                    Введите телефон длиной {{formCreateOrderHall.get('telephone')?.errors?.['maxlength'].requiredLength}} символов.
+                    Вы ввели {{formCreateOrderHall.get('telephone')?.errors?.['maxlength'].actualLength}}.
                   </small>
                 </div>
               </div>
               <div class="create-order__form-control">
-                <input type="text" name="address" class="create-ordr__input" placeholder="Адрес" formControlName="address">
+                <input type="orderedTime" name="orderedTime" class="create-ordr__input" placeholder="Дата" formControlName="orderedTime">
                 <div
-                  *ngIf="formCreateOrder.get('address')?.invalid && formCreateOrder.get('address')?.touched"
+                  *ngIf="formCreateOrderHall.get('orderedTime')?.invalid && formCreateOrderHall.get('orderedTime')?.touched"
                   class="validation"
                 >
                   <small>Заполните поле</small>
                 </div>
               </div>
               <div class="create-order__form-control">
-                <input type="date" name="date" class="create-ordr__input" placeholder="Дата" formControlName="date">
+                <input type="time" name="time" class="create-ordr__input" placeholder="Время" formControlName="timeStart">
                 <div
-                  *ngIf="formCreateOrder.get('date')?.invalid && formCreateOrder.get('date')?.touched"
+                  *ngIf="formCreateOrderHall.get('timeStart')?.invalid && formCreateOrderHall.get('timeStart')?.touched"
                   class="validation"
                 >
                   <small>Заполните поле</small>
                 </div>
               </div>
               <div class="create-order__form-control">
-                <input type="time" name="time" class="create-ordr__input" placeholder="Время" formControlName="time">
-                <div
-                  *ngIf="formCreateOrder.get('time')?.invalid && formCreateOrder.get('time')?.touched"
-                  class="validation"
-                >
-                  <small>Заполните поле</small>
-                </div>
-              </div>
-              <div class="create-order__form-control">
-                <select class="hallOrDev__select2" name="hallOrDev" id="status" formControlName="status">
+                <select class="hallOrDev__select2" name="hallOrDev" formControlName="isDone">
                   <option class="hallOrDev__option" value=""> Статус </option>
                   <option class="hallOrDev__option" value="Hall">Обрабатывается</option>
                   <option class="hallOrDev__option" value="Hall">Готовится</option>
@@ -103,14 +91,223 @@
                   <option class="hallOrDev__option" value="Delivery">Доставлен</option>
                 </select>
                 <div
-                  *ngIf="formCreateOrder.get('status')?.invalid && formCreateOrder.get('status')?.touched"
+                  *ngIf="formCreateOrderHall.get('isDone')?.invalid && formCreateOrderHall.get('isDone')?.touched"
                   class="validation"
                 >
                   <small>Выберите статус</small>
                 </div>
               </div>
+              <div class="create-order__form-control">
+                <select class="hallOrDev__select2" name="hallOrDev" formControlName="restaurant">
+                  <option class="hallOrDev__option" value=""> Название Ресторана </option>
+                  <option class="hallOrDev__option" value="RK">Русская кухня</option>
+                  <option class="hallOrDev__option" value="AK">Американская кухня</option>
+                  <option class="hallOrDev__option" value="JK">Японская кухня</option>
+                  <option class="hallOrDev__option" value="IK">Итальянская кухня</option>
+                  <option class="hallOrDev__option" value="GK">Грузинская кухня</option>
+                </select>
+                <div
+                  *ngIf="formCreateOrderHall.get('restaurant')?.invalid && formCreateOrderHall.get('restaurant')?.touched"
+                  class="validation"
+                >
+                  <small>Выберите ресторан</small>
+                </div>
+              </div>
+              <div class="create-order__form-control">
+                <select class="hallOrDev__select2" name="hallOrDev" formControlName="dishes">
+                  <option class="hallOrDev__option" value=""> Блюда </option>
+                  <option class="hallOrDev__option" value="RK">Русская кухня</option>
+                  <option class="hallOrDev__option" value="AK">Американская кухня</option>
+                  <option class="hallOrDev__option" value="JK">Японская кухня</option>
+                  <option class="hallOrDev__option" value="IK">Итальянская кухня</option>
+                  <option class="hallOrDev__option" value="GK">Грузинская кухня</option>
+                </select>
+<!--                <div-->
+<!--                  *ngIf="formCreateOrderHall.get('dishes')?.invalid && formCreateOrderHall.get('isDone')?.touched"-->
+<!--                  class="validation"-->
+<!--                >-->
+<!--                  <small>Выберите ресторан</small>-->
+<!--                </div>-->
+              </div>
+              <div class="create-order__form-control">
+                <select class="hallOrDev__select2" name="hallOrDev" formControlName="dishes">
+                  <option class="hallOrDev__option" value=""> Напитки </option>
+                  <option class="hallOrDev__option" value="RK">Русская кухня</option>
+                  <option class="hallOrDev__option" value="AK">Американская кухня</option>
+                  <option class="hallOrDev__option" value="JK">Японская кухня</option>
+                  <option class="hallOrDev__option" value="IK">Итальянская кухня</option>
+                  <option class="hallOrDev__option" value="GK">Грузинская кухня</option>
+                </select>
+<!--                <div-->
+<!--                  *ngIf="formCreateOrderHall.get('dishes')?.invalid && formCreateOrderHall.get('isDone')?.touched"-->
+<!--                  class="validation"-->
+<!--                >-->
+<!--                  <small>Выберите ресторан</small>-->
+<!--                </div>-->
+              </div>
+
+              <div class="menu__dish-drink-card">
+                <ul class="menu__dish-drink-list" *ngFor="let dish of sortedDishes; let i = index">
+                  <li class="item-title">{{dish.name}}</li>
+                  <li class="item-title">{{dish.description}}</li>
+                  <li><b>Цена: </b>{{dish.price}}</li>
+                  <li><b>Вес: </b>{{dish.weight}}</li>
+                  <li class="last-item"><b>Калории: </b>{{dish.calories}}</li>
+                  <li class="inc-dec__item">
+<!--                    <button class="btn btn-inc-dec" [disabled]="sortedDishes[i].amount == 0" (click)="decValDish(i)">-</button>-->
+<!--                    <input class="input-to-basket" type="text" [(ngModel)]="sortedDishes[i].amount">-->
+<!--                    <button class="btn btn-inc-dec" (click)="incValDish(i)">+</button>-->
+                  </li>
+<!--                  <li><button class="btn btn-to-basket">В корзину</button></li>-->
+                </ul>
+              </div>
+
             </div>
-            <button class="btn reg__btn" type="submit" [disabled]="formCreateOrder.invalid">Создать</button>
+            <button class="btn reg__btn" type="submit" [disabled]="formCreateOrderHall.invalid">Создать</button>
+          </form>
+
+
+<!--          Form Delivery-->
+          <form class="create-order__form" [formGroup]="formCreateOrderHall" (ngSubmit)="submit()" *ngIf="!ordersToggle">
+            <div class="form-elements">
+              <div class="create-order__form-control">
+                <input type="text" name="camountOfPlaces" class="create-ordr__input" placeholder="ФИ заказчика" formControlName="fio">
+                <div
+                  *ngIf="formCreateOrderHall.get('fio')?.invalid && formCreateOrderHall.get('fio')?.touched"
+                  class="validation"
+                >
+                  <small>Заполните поле</small>
+                </div>
+              </div>
+              <div class="create-order__form-control">
+                <input type="text" name="telephoneNumber" class="create-ordr__input" placeholder="Телефон" formControlName="telephone">
+                <div
+                  *ngIf="formCreateOrderHall.get('telephone')?.invalid && formCreateOrderHall.get('telephone')?.touched"
+                  class="validation"
+                >
+                  <small *ngIf="formCreateOrderHall.get('telephone')?.errors?.['required']">
+                    Заполните поле
+                  </small>
+                  <small *ngIf="formCreateOrderHall.get('telephone')?.hasError('minlength')">
+                    Введите телефон длиной {{formCreateOrderHall.get('telephone')?.errors?.['minlength'].requiredLength}} символов.
+                    Вы ввели {{formCreateOrderHall.get('telephone')?.errors?.['minlength'].actualLength}}.
+                  </small>
+                  <small *ngIf="formCreateOrderHall.get('telephone')?.hasError('maxlength')">
+                    Введите телефон длиной {{formCreateOrderHall.get('telephone')?.errors?.['maxlength'].requiredLength}} символов.
+                    Вы ввели {{formCreateOrderHall.get('telephone')?.errors?.['maxlength'].actualLength}}.
+                  </small>
+                </div>
+              </div>
+              <div class="create-order__form-control">
+                <input type="text" name="address" class="create-ordr__input" placeholder="Адрес" formControlName="address">
+                <div
+                  *ngIf="formCreateOrderHall.get('address')?.invalid && formCreateOrderHall.get('address')?.touched"
+                  class="validation"
+                >
+                  <small>Заполните поле</small>
+                </div>
+              </div>
+              <div class="create-order__form-control">
+                <input type="orderedTime" name="orderedTime" class="create-ordr__input" placeholder="Дата" formControlName="orderedTime">
+                <div
+                  *ngIf="formCreateOrderHall.get('orderedTime')?.invalid && formCreateOrderHall.get('orderedTime')?.touched"
+                  class="validation"
+                >
+                  <small>Заполните поле</small>
+                </div>
+              </div>
+              <div class="create-order__form-control">
+                <input type="time" name="time" class="create-ordr__input" placeholder="Время" formControlName="time">
+                <div
+                  *ngIf="formCreateOrderHall.get('time')?.invalid && formCreateOrderHall.get('time')?.touched"
+                  class="validation"
+                >
+                  <small>Заполните поле</small>
+                </div>
+              </div>
+              <div class="create-order__form-control">
+                <select class="hallOrDev__select2" name="hallOrDev" formControlName="isDone">
+                  <option class="hallOrDev__option" value=""> Статус </option>
+                  <option class="hallOrDev__option" value="Hall">Обрабатывается</option>
+                  <option class="hallOrDev__option" value="Hall">Готовится</option>
+                  <option class="hallOrDev__option" value="Delivery">Готов</option>
+                  <option class="hallOrDev__option" value="Delivery">Доставляется</option>
+                  <option class="hallOrDev__option" value="Delivery">Доставлен</option>
+                </select>
+                <div
+                  *ngIf="formCreateOrderHall.get('isDone')?.invalid && formCreateOrderHall.get('isDone')?.touched"
+                  class="validation"
+                >
+                  <small>Выберите статус</small>
+                </div>
+              </div>
+              <div class="create-order__form-control">
+                <select class="hallOrDev__select2" name="hallOrDev" formControlName="restaurant">
+                  <option class="hallOrDev__option" value=""> Название Ресторана </option>
+                  <option class="hallOrDev__option" value="RK">Русская кухня</option>
+                  <option class="hallOrDev__option" value="AK">Американская кухня</option>
+                  <option class="hallOrDev__option" value="JK">Японская кухня</option>
+                  <option class="hallOrDev__option" value="IK">Итальянская кухня</option>
+                  <option class="hallOrDev__option" value="GK">Грузинская кухня</option>
+                </select>
+                <div
+                  *ngIf="formCreateOrderHall.get('restaurant')?.invalid && formCreateOrderHall.get('restaurant')?.touched"
+                  class="validation"
+                >
+                  <small>Выберите ресторан</small>
+                </div>
+              </div>
+              <div class="create-order__form-control">
+                <select class="hallOrDev__select2" name="hallOrDev" formControlName="restaurant">
+                  <option class="hallOrDev__option" value=""> Блюда </option>
+                  <option class="hallOrDev__option" value="RK">Русская кухня</option>
+                  <option class="hallOrDev__option" value="AK">Американская кухня</option>
+                  <option class="hallOrDev__option" value="JK">Японская кухня</option>
+                  <option class="hallOrDev__option" value="IK">Итальянская кухня</option>
+                  <option class="hallOrDev__option" value="GK">Грузинская кухня</option>
+                </select>
+                <div
+                  *ngIf="formCreateOrderHall.get('restaurant')?.invalid && formCreateOrderHall.get('restaurant')?.touched"
+                  class="validation"
+                >
+                  <small>Выберите ресторан</small>
+                </div>
+              </div>
+              <div class="create-order__form-control">
+                <select class="hallOrDev__select2" name="hallOrDev" formControlName="restaurant">
+                  <option class="hallOrDev__option" value=""> Напитки </option>
+                  <option class="hallOrDev__option" value="RK">Русская кухня</option>
+                  <option class="hallOrDev__option" value="AK">Американская кухня</option>
+                  <option class="hallOrDev__option" value="JK">Японская кухня</option>
+                  <option class="hallOrDev__option" value="IK">Итальянская кухня</option>
+                  <option class="hallOrDev__option" value="GK">Грузинская кухня</option>
+                </select>
+                <div
+                  *ngIf="formCreateOrderHall.get('restaurant')?.invalid && formCreateOrderHall.get('restaurant')?.touched"
+                  class="validation"
+                >
+                  <small>Выберите ресторан</small>
+                </div>
+              </div>
+
+              <div class="menu__dish-drink-card">
+                <ul class="menu__dish-drink-list" *ngFor="let dish of sortedDishes; let i = index">
+                  <li class="item-title">{{dish.name}}</li>
+                  <li class="item-title">{{dish.description}}</li>
+                  <li><b>Цена: </b>{{dish.price}}</li>
+                  <li><b>Вес: </b>{{dish.weight}}</li>
+                  <li class="last-item"><b>Калории: </b>{{dish.calories}}</li>
+                  <li class="inc-dec__item">
+<!--                    <button class="btn btn-inc-dec" [disabled]="sortedDishes[i].amount == 0" (click)="decValDish(i)">-</button>-->
+<!--                    <input class="input-to-basket" type="text" [(ngModel)]="sortedDishes[i].amount">-->
+<!--                    <button class="btn btn-inc-dec" (click)="incValDish(i)">+</button>-->
+                  </li>
+<!--                  <li><button class="btn btn-to-basket">В корзину</button></li>-->
+                </ul>
+              </div>
+
+            </div>
+            <button class="btn reg__btn" type="submit" [disabled]="formCreateOrderHall.invalid">Создать</button>
           </form>
         </div>
       </div>
@@ -128,10 +325,10 @@
         <table class="orders__table">
           <tr class="table_row">
             <th class="table_header">Номер</th>
-            <th class="table_header">Количество мест</th>
+<!--            <th class="table_header">Количество мест</th>-->
             <th class="table_header">Стол</th>
             <th class="table_header">Дата и время</th>
-            <th class="table_header">Телефон</th>
+<!--            <th class="table_header">Телефон</th>-->
             <th class="table_header">Статус</th>
             <th>
               <p>Изменение</p>
@@ -139,12 +336,12 @@
             </th>
           </tr>
           <tr class="table_row" *ngFor="let order of getOrdersHall()">
-            <td class="table_data">{{order.number}}</td>
-            <td class="table_data">{{order.amountOfPlaces}}</td>
-            <td class="table_data">{{order.table}}</td>
-            <td class="table_data">{{order.date}}</td>
-            <td class="table_data">{{order.telephone}}</td>
-            <td class="table_data-status">{{order.status}}</td>
+            <td class="table_data" style="width: 120px">{{order.id + 1}}</td>
+<!--            <td class="table_data">{{order.amountOfPlaces}}</td>-->
+            <td class="table_data" style="width: 120px">{{order.seatNumber}}</td>
+            <td class="table_data" style="width: 190px">{{order.orderedTime | date:'dd.MM.yyyy hh:mm'}}</td>
+<!--            <td class="table_data">{{order.telephone}}</td>-->
+            <td class="table_data-isDone">{{order.isDone}}</td>
             <td class="edit-delete-links">
               <a class="link-edit__user">Изменить</a>
               <a class="link-delete__user">Удалить</a>
@@ -158,8 +355,8 @@
           <tr class="table_row">
             <th class="table_header">Номер</th>
             <th class="table_header">Дата и время</th>
-            <th class="table_header">Адрес</th>
-            <th class="table_header">Телефон</th>
+<!--            <th class="table_header">Адрес</th>-->
+<!--            <th class="table_header">Телефон</th>-->
             <th class="table_header">Статус</th>
             <th>
               <p>Изменение</p>
@@ -167,12 +364,12 @@
             </th>
           </tr>
           <tr class="table_row" *ngFor="let order of getOrdersDelivery()">
-            <td class="table_data">{{order.number}}</td>
-            <td class="table_data">{{order.date}}</td>
-            <td class="table_data">{{order.address}}</td>
-            <td class="table_data">{{order.telephone}}</td>
-            <td class="table_data-status">{{order.status}}</td>
-            <td class="edit-delete-links">
+            <td class="table_data" style="width: 150px">{{order.id + 1}}</td>
+            <td class="table_data" style="width: 190px">{{order.orderedTime | date:'dd.MM.yyyy hh:mm'}}</td>
+<!--            <td class="table_data">{{order.address}}</td>-->
+<!--            <td class="table_data">{{order.telephone}}</td>-->
+            <td class="table_data-isDone" style="width: 190px">{{order.isDone}}</td>
+            <td class="edit-delete-links" style="width: 190px">
               <a class="link-edit__user">Изменить</a>
               <a class="link-delete__user">Удалить</a>
             </td>
@@ -181,12 +378,12 @@
       </div>
     </div>
 
-    <div class="orders-box" *ngIf="role == 'Client'">
+    <div class="orders-box" *ngIf="role == 'client'">
       <div class="order" *ngFor="let order of getOrdersDelivery(), let i = index">
         <div class="order-info">
           <div class="order-info-b-p-flex ord-num">
             <b style="margin-right: 10px">Номер заказа:</b>
-            <p class="order-info-element">{{order.number}}</p>
+            <p class="order-info-element">{{order.id + 1}}</p>
           </div>
           <button class="btn show-info-btn" (click)="toggleInfo = !toggleInfo">
             <small *ngIf="!toggleInfo; else hideInfo">Информация о позициях</small>
@@ -195,51 +392,46 @@
           <div class="hidden-info" *ngIf="toggleInfo">
             <h2 class="info-title">Блюда</h2>
             <div class="dishes-drinks-info-flex" style="margin-bottom: 20px">
-              <div class="dishes-drinks-info" *ngFor="let dish of getDishes()">
-                <p class="dishes-drinks-info-element">{{dish.name}}</p>
-                <p class="dishes-drinks-info-element">{{dish.price}}</p>
-              </div>
+<!--              <div class="dishes-drinks-info" *ngFor="let dish of getDishes()">-->
+<!--                <p class="dishes-drinks-info-element">{{dish.name}}</p>-->
+<!--                <p class="dishes-drinks-info-element">{{dish.price}}</p>-->
+<!--              </div>-->
             </div>
             <h2 class="info-title">Напитки</h2>
             <div class="dishes-drinks-info-flex">
-              <div class="dishes-drinks-info" *ngFor="let drink of getDrinks(); let i = index">
-                <p class="dishes-drinks-info-element">{{drink.name}}</p>
-                <p class="dishes-drinks-info-element">{{drink.price}}</p>
-              </div>
+<!--              <div class="dishes-drinks-info" *ngFor="let drink of getDrinks(); let i = index">-->
+<!--                <p class="dishes-drinks-info-element">{{drink.name}}</p>-->
+<!--                <p class="dishes-drinks-info-element">{{drink.price}}</p>-->
+<!--              </div>-->
             </div>
           </div>
           <div class="order-info-b-p-flex">
             <b style="margin-right: 10px">Название ресторана:</b>
-            <p class="order-info-element">{{order.restaurantName}}</p>
+            <p class="order-info-element">{{order.restaurant}}</p>
           </div>
           <div class="order-info-b-p-flex">
             <b style="margin-right: 10px">Дата заказа:</b>
-            <p class="order-info-element">{{order.date}}</p>
-          </div>
-          <div class="order-info-b-p-flex">
-            <b style="margin-right: 10px">Цена заказа:</b>
-            <p class="order-info-element">{{order.price}}</p>
+            <p class="order-info-element">{{order.orderedTime | date:'dd.MM.yyyy' }}</p>
           </div>
         </div>
 
-        <div class="checkboxs">
-          <div class="checkbox">
-            <input class="checkbox-input" type="checkbox" id="hall" value="coding" (change)="checkedD[i] = false; checkedH[i] = true" [checked]="checkedH[i]">
-            <label for="hall">В зале</label>
-          </div>
-          <div class="checkbox">
-            <input class="checkbox-input" type="checkbox" id="delivery" value="delivery" (change)="checkedH[i] = false; checkedD[i] = true" [checked]="checkedD[i]">
-            <label for="delivery">Доставка</label>
-          </div>
-        </div>
+<!--        <div class="checkboxs">-->
+<!--          <div class="checkbox">-->
+<!--            <input class="checkbox-input" type="checkbox" id="hall" value="coding" (change)="checkedD[i] = !checkedD[i]; checkedH[i] = !checkedH[i]" [checked]="checkedH[i]">-->
+<!--            <label for="hall">В зале</label>-->
+<!--          </div>-->
+<!--          <div class="checkbox">-->
+<!--            <input class="checkbox-input" type="checkbox" id="delivery" value="delivery" (change)="checkedH[i] = !checkedH[i]; checkedD[i] = !checkedD[i]" [checked]="checkedD[i]">-->
+<!--            <label for="delivery">Доставка</label>-->
+<!--          </div>-->
+<!--        </div>-->
 
         <div class="payment-info">
-          <button class="btn" *ngIf="getPayment(i).status == false; else paidStatus" (click)="getPayment(i).status = true">Оформить</button>
-          <ng-template #paidStatus>
-            <div class="ordder-status">
-              <h2>Заказ {{order.status}}</h2>
+<!--          <button class="btn" *ngIf="getPayment(i).isDone == false; else paidisDone" (click)="getPayment(i).isDone = true" [routerLink]="['/checkoutorder']">Оформить</button>-->
+
+            <div class="ordder-isDone">
+              <h2>{{order.isDone}}</h2>
             </div>
-          </ng-template>
         </div>
       </div>
     </div>

@@ -3,8 +3,12 @@
     <div class="login__container">
       <div class="login__box">
         <h1 class="login__header">Вход</h1>
-        <input type="text" class="login__input" placeholder="Email" [(ngModel)]="username">
-        <input type="password" class="login__input" placeholder="Пароль" [(ngModel)]="password">
+        <input type="text" class="login__input" placeholder="Телефон" [(ngModel)]="username" (keyup.enter)="onLoginClick()">
+        <input type="password" class="login__input" placeholder="Пароль" [(ngModel)]="password" (keyup.enter)="onLoginClick()">
+        <div class="error__box validation" *ngIf="errorToggle">
+          <p class="error-text" *ngIf="username == ''">Введите телефон</p>
+          <p class="error-text" *ngIf="password == ''">Введите пароль</p>
+        </div>
         <button class="btn reg-log-btn" (click)="onLoginClick()">Войти</button>
         <button class="btn reg-log-btn" routerLink="/signup">Регистрация</button>
       </div>

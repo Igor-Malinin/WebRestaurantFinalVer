@@ -1,12 +1,13 @@
 <div class="wrapper">
   <div class="create__rest-form">
     <button class="btn btn-go-back" type="button" routerLink="/restaurants">Назад</button>
+<!--    <button class="btn btn-go-back" type="button" (click)="showCon()">Показать</button>-->
     <form class="create__form" [formGroup]="formCreateRest" (ngSubmit)="submit()">
       <h1 class="create__title">Создание нового ресторана</h1>
       <div class="create__form-control">
-        <input type="text" name="rName" class="create__input" placeholder="Имя ресторана" formControlName="name">
+        <input type="text" name="rName" class="create__input" placeholder="Имя ресторана" formControlName="restaurantName">
         <div
-          *ngIf="formCreateRest.get('name')?.invalid && formCreateRest.get('name')?.touched"
+          *ngIf="formCreateRest.get('restaurantName')?.invalid && formCreateRest.get('restaurantName')?.touched"
           class="validation"
         >
           <small>Поле не может быть пустым</small>
@@ -22,50 +23,83 @@
         </div>
       </div>
       <div class="create__form-control">
-        <input type="text" name="rAmountOfPlaces" class="create__input" placeholder="Количество посадочных мест" formControlName="amountOfPlaces">
+        <input type="text" name="kitchenSpeciality" class="create__input" placeholder="Специализация кухни" formControlName="kitchenSpeciality">
         <div
-          *ngIf="formCreateRest.get('name')?.invalid && formCreateRest.get('name')?.touched"
+          *ngIf="formCreateRest.get('kitchenSpeciality')?.invalid && formCreateRest.get('kitchenSpeciality')?.touched"
           class="validation"
         >
           <small>Поле не может быть пустым</small>
         </div>
       </div>
-
-
-
-      <h1 class="create__title">Меню:</h1>
-      <div formArrayName="dishes">
-        <h1 class="create__title">Блюда:</h1>
-        <button class="btn add-btn" type="button" (click)="addDish()">Добавить блюдо</button>
-        <div *ngFor="let dish of dishes.controls; let i = index">
-          <div class="new-dish-drink" [formGroupName]="i">
-            <div class="new-dish-drink-flex-inputs">
-              <input formControlName="name" placeholder="Название блюда" class="new-dish-drink__input">
-              <input formControlName="category" placeholder="Категория блюда" class="new-dish-drink__input">
-              <input formControlName="description" placeholder="Описание блюда" class="new-dish-drink__input">
-              <input formControlName="price" placeholder="Цена блюда" class="new-dish-drink__input">
-              <input formControlName="weight" placeholder="Вес блюда" class="new-dish-drink__input">
-              <input formControlName="calories" placeholder="Калорийность блюда" class="new-dish-drink__input">
+      <div class="create__form-control">
+        <input type="text" name="wallpaperURL" class="create__input" placeholder="Ссылка на изображение" formControlName="wallpaperURL">
+        <div
+          *ngIf="formCreateRest.get('wallpaperURL')?.invalid && formCreateRest.get('wallpaperURL')?.touched"
+          class="validation"
+        >
+          <small>Поле не может быть пустым</small>
+        </div>
+      </div>
+      <div class="create__form-control">
+        <div class="tables-array" formArrayName="tables">
+          <h2 class="create__title">Количество столов:</h2>
+          <div class="tables-contorl-btns">
+            <button class="btn add-btn" type="button" [disabled]="tables.length == 1" (click)="deleteTable(tables.length-1)">&minus;</button>
+            <input type="text" [value]="tables.length" style="width: 50px; text-align: center">
+            <button class="btn add-btn" type="button" (click)="addTable()">+</button>
+          </div>
+          <div class="numberOfSeats-array-field" *ngFor="let table of tables.controls; let i = index">
+            <div class="flex-column">
+              <div class="numberOfSeats-array" [formGroupName]="i">
+                <input type="text" class="create__input" placeholder="Количество мест" style="width: 200px; text-align: center" formControlName="numberOfSeats">
+              </div>
+              <div
+                *ngIf="formCreateRest.controls['tables'].controls[i].controls['numberOfSeats']?.invalid && formCreateRest.controls['tables'].controls[i].controls['numberOfSeats']?.touched"
+                class="validation"
+              >
+                <small>Заполните поле</small>
+              </div>
             </div>
-            <button class="btn" (click)="deleteDish(i)">Удалить блюдо</button>
           </div>
         </div>
       </div>
 
-      <div formArrayName="drinks">
-        <h1 class="create__title">Напитки:</h1>
-        <button class="btn add-btn" type="button" (click)="addDrink()">Добавить напиток</button>
-        <div *ngFor="let drink of drinks.controls; let i = index">
-          <div class="new-dish-drink" [formGroupName]="i">
-            <div class="new-dish-drink-flex-inputs">
-              <input formControlName="name" placeholder="Название напитка" class="new-dish-drink__input">
-              <input formControlName="category" placeholder="Категория напитка" class="new-dish-drink__input">
-              <input formControlName="description" placeholder="Описание напитка" class="new-dish-drink__input">
-              <input formControlName="price" placeholder="Цена напитка" class="new-dish-drink__input">
-              <input formControlName="volume" placeholder="Объем напитка" class="new-dish-drink__input">
-              <input formControlName="priceOfBottle" placeholder="Цена бутылки" class="new-dish-drink__input">
+
+      <div class="menu-group" formGroupName="menu">
+        <h1 class="create__title" style="font-size: 20px; margin-bottom: 15px">Меню:</h1>
+        <div formArrayName="dishes">
+          <h2 class="create__title" style="margin-bottom: 10px">Блюда:</h2>
+          <button class="btn add-btn" type="button" (click)="addDish()">Добавить блюдо</button>
+          <div *ngFor="let dish of dishes.controls; let i = index">
+            <div class="new-dish-drink" [formGroupName]="i">
+              <div class="new-dish-drink-flex-inputs">
+                <input formControlName="name" placeholder="Название блюда" class="new-dish-drink__input">
+                <input formControlName="category" placeholder="Категория блюда" class="new-dish-drink__input">
+                <input formControlName="description" placeholder="Описание блюда" class="new-dish-drink__input">
+                <input formControlName="price" placeholder="Цена блюда" class="new-dish-drink__input">
+                <input formControlName="weight" placeholder="Вес блюда" class="new-dish-drink__input">
+                <input formControlName="calories" placeholder="Калорийность блюда" class="new-dish-drink__input">
+              </div>
+              <button class="btn" [disabled]="dishes.length == 1" (click)="deleteDish(i)">Удалить блюдо</button>
             </div>
-            <button class="btn" (click)="deleteDrink(i)">Удалить напиток</button>
+          </div>
+        </div>
+
+        <div formArrayName="drinks">
+          <h1 class="create__title" style="margin: 15px 0">Напитки:</h1>
+          <button class="btn add-btn" type="button" (click)="addDrink()">Добавить напиток</button>
+          <div *ngFor="let drink of drinks.controls; let i = index">
+            <div class="new-dish-drink" [formGroupName]="i">
+              <div class="new-dish-drink-flex-inputs">
+                <input formControlName="name" placeholder="Название напитка" class="new-dish-drink__input">
+                <input formControlName="category" placeholder="Категория напитка" class="new-dish-drink__input">
+                <input formControlName="description" placeholder="Описание напитка" class="new-dish-drink__input">
+                <input formControlName="price" placeholder="Цена напитка" class="new-dish-drink__input">
+                <input formControlName="volume" placeholder="Объем напитка" class="new-dish-drink__input">
+                <input formControlName="priceOfBottle" placeholder="Цена бутылки" class="new-dish-drink__input">
+              </div>
+              <button class="btn" [disabled]="drinks.length == 1" (click)="deleteDrink(i)">Удалить напиток</button>
+            </div>
           </div>
         </div>
       </div>

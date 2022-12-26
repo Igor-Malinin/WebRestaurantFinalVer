@@ -1,0 +1,30 @@
+<div class="wrapper">
+  <div class="paige__container">
+    <div class="main-style-box">
+      <h2 class="page_title" *ngIf="dishesBasket.length == 0 && drinksBasket.length == 0; else basketOrders">Корзина пуста</h2>
+<!--              <button type="button" class="btn" (click)="getTotal()">Показать</button>-->
+      <ng-template #basketOrders>
+        <div class="basket-orders">
+          <h2 class="basket-title" style="margin-bottom: 20px;">Блюда:</h2>
+          <div class="order-elements">
+            <div class="order-element" *ngFor="let dish of getDishes(); let i = index">
+              <p class="order-elements-info">{{dish.name}}</p>
+              <p class="order-elements-info"><b>Цена:</b> {{dish.price}}</p>
+              <button type="button" class="btn" (click)="deleteDish(i)">Удалить</button>
+            </div>
+          </div>
+          <h2 class="basket-title" style="margin: 20px 0;">Напитки:</h2>
+          <div class="order-elements">
+            <div class="order-element" *ngFor="let drink of getDrinks(); let i = index">
+              <p class="order-elements-info">{{drink.name}}</p>
+              <p class="order-elements-info"><b>Цена:</b> {{drink.price}}</p>
+              <button type="button" class="btn" (click)="deleteDrink(i)">Удалить</button>
+            </div>
+          </div>
+        <p class="total" style="margin-top: 20px; align-self: flex-end"><b>Общая стоимость:</b> {{getTotal()}}</p>
+        <button class="btn" style="margin-top: 20px; align-self: flex-end">Оформить</button>
+        </div>
+      </ng-template>
+    </div>
+  </div>
+</div>

@@ -5,6 +5,7 @@
         <small *ngIf="!regToggle">Добавить пользователя</small>
         <small *ngIf="regToggle">Отменить</small>
       </button>
+<!--      <button class="btn" type="button" (click)="getSome()">показать</button>-->
       <div class="search-elements">
         <input type="text" class="search-field">
         <button class="btn">Поиск</button>
@@ -34,30 +35,21 @@
           </div>
         </div>
         <div class="reg__form-control">
-          <input type="text" name="cPat" class="reg__input" placeholder="Отчество" formControlName="patronymic">
+          <input type="text" name="telephone" class="reg__input" placeholder="Телефон" formControlName="telephone">
           <div
-            *ngIf="formUserReg.get('patronymic')?.invalid && formUserReg.get('patronymic')?.touched"
+            *ngIf="formUserReg.get('telephone')?.invalid && formUserReg.get('telephone')?.touched"
             class="validation"
           >
-            <small>Поле не может быть пустым</small>
-          </div>
-        </div>
-        <div class="reg__form-control">
-          <input type="text" name="telephoneNumber" class="reg__input" placeholder="Телефон" formControlName="telephoneNumber">
-          <div
-            *ngIf="formUserReg.get('telephoneNumber')?.invalid && formUserReg.get('telephoneNumber')?.touched"
-            class="validation"
-          >
-            <small *ngIf="formUserReg.get('telephoneNumber')?.errors?.['required']">
+            <small *ngIf="formUserReg.get('telephone')?.errors?.['required']">
               Поле не может быть пустым
             </small>
-            <small *ngIf="formUserReg.get('telephoneNumber')?.hasError('minlength')">
-              Введите телефон длиной {{formUserReg.get('telephoneNumber')?.errors?.['minlength'].requiredLength}} символов.
-              Вы ввели {{formUserReg.get('telephoneNumber')?.errors?.['minlength'].actualLength}}.
+            <small *ngIf="formUserReg.get('telephone')?.hasError('minlength')">
+              Введите телефон длиной {{formUserReg.get('telephone')?.errors?.['minlength'].requiredLength}} символов.
+              Вы ввели {{formUserReg.get('telephone')?.errors?.['minlength'].actualLength}}.
             </small>
-            <small *ngIf="formUserReg.get('telephoneNumber')?.hasError('maxlength')">
-              Введите телефон длиной {{formUserReg.get('telephoneNumber')?.errors?.['maxlength'].requiredLength}} символов.
-              Вы ввели {{formUserReg.get('telephoneNumber')?.errors?.['maxlength'].actualLength}}.
+            <small *ngIf="formUserReg.get('telephone')?.hasError('maxlength')">
+              Введите телефон длиной {{formUserReg.get('telephone')?.errors?.['maxlength'].requiredLength}} символов.
+              Вы ввели {{formUserReg.get('telephone')?.errors?.['maxlength'].actualLength}}.
             </small>
           </div>
         </div>
@@ -73,10 +65,11 @@
         <div class="reg__form-control">
           <select class="role__select" name="roles" id="role-select" formControlName="role">
             <option class="role__option" value=""> Выберите роль </option>
-            <option class="role__option" value="Admin">Администратор</option>
-            <option class="role__option" value="Manager">Менеджер</option>
-            <option class="role__option" value="Courier">Курьер</option>
-            <option class="role__option" value="Client">Клиент</option>
+            <option class="role__option" value="admin">Администратор</option>
+            <option class="role__option" value="manager">Менеджер</option>
+            <option class="role__option" value="deliveryman">Курьер</option>
+            <option class="role__option" value="chef">Шеф-повар</option>
+            <option class="role__option" value="client">Клиент</option>
           </select>
           <div
             *ngIf="formUserReg.get('role')?.invalid && formUserReg.get('role')?.touched"
@@ -85,29 +78,20 @@
             <small>Роль не назначена, выберите роль</small>
           </div>
         </div>
-        <div class="reg__form-control">
-          <input type="text" name="email" class="reg__input" placeholder="E-mail" formControlName="email">
-          <div
-            *ngIf="formUserReg.get('email')?.invalid && formUserReg.get('email')?.touched"
-            class="validation"
-          >
-            <small *ngIf="formUserReg.get('email')?.errors?.['required']">
-              Поле не может быть пустым
-            </small>
-            <small *ngIf="formUserReg.get('email')?.errors?.['email']">
-              Введите корректный E-mail
-            </small>
-          </div>
-        </div>
-        <div class="reg__form-control">
-          <input type="text" name="cLog" class="reg__input" placeholder="Логин" formControlName="login">
-          <div
-            *ngIf="formUserReg.get('login')?.invalid && formUserReg.get('login')?.touched"
-            class="validation"
-          >
-            <small>Поле не может быть пустым</small>
-          </div>
-        </div>
+<!--        <div class="reg__form-control">-->
+<!--          <input type="text" name="email" class="reg__input" placeholder="E-mail" formControlName="email">-->
+<!--          <div-->
+<!--            *ngIf="formUserReg.get('email')?.invalid && formUserReg.get('email')?.touched"-->
+<!--            class="validation"-->
+<!--          >-->
+<!--            <small *ngIf="formUserReg.get('email')?.errors?.['required']">-->
+<!--              Поле не может быть пустым-->
+<!--            </small>-->
+<!--            <small *ngIf="formUserReg.get('email')?.errors?.['email']">-->
+<!--              Введите корректный E-mail-->
+<!--            </small>-->
+<!--          </div>-->
+<!--        </div>-->
         <div class="reg__form-control">
           <input type="text" name="password" class="reg__input" placeholder="Пароль" formControlName="password">
           <div
@@ -137,19 +121,20 @@
         <th>Роль</th>
         <th>Телефон</th>
         <th>Адрес</th>
-        <th>Логин</th>
-        <th>Email</th>
-        <th>Пароль</th>
+<!--        <th>Пароль</th>-->
+        <th>Ресторан</th>
+        <th>Работает</th>
+<!--        <th>Email</th>-->
         <th>Изменение  Удаление</th>
       </tr>
       <tr class="table_row" *ngFor="let user of users">
-        <td>{{user.surname}} {{user.name}} {{user.patronymic}}</td>
-        <td>{{user.role}}</td>
-        <td>{{user.telephoneNumber}}</td>
+        <td>{{user.surname}} {{user.name}}</td>
+        <td>{{user.role.roleName}}</td>
+        <td>{{user.telephone}}</td>
         <td>{{user.address}}</td>
-        <td>{{user.login}}</td>
-        <td>{{user.email}}</td>
-        <td>{{user.password}}</td>
+<!--        <td>{{user.password}}</td>-->
+        <td>пусто{{user.placeOfWork}}</td>
+        <td>{{user.working}}</td>
         <td class="edit-delete-links">
           <a class="link-edit__user" style="margin-bottom: 15px">Изменить</a>
           <a class="link-delete__user" (click)="deleteUser(user.id)">Удалить</a>

@@ -5,6 +5,7 @@ import {RestaurantsService} from "../services/restaurants.service";
 import {Router} from "@angular/router";
 import {UsersService} from "../services/users.service";
 import {AuthService} from "../services/auth.service";
+import {User} from "../entity/User";
 
 @Component({
   selector: 'app-signup',
@@ -31,24 +32,27 @@ export class SignupComponent implements OnInit {
       id: [null],
       surname: ['', Validators.required],
       name: ['', Validators.required],
-      patronymic: ['', Validators.required],
-      telephoneNumber: [null,[
+      telephone: [null,[
         Validators.required,
         Validators.minLength(this.telephoneLength),
         Validators.maxLength(this.telephoneLength)
       ]],
-      address: ['', Validators.required],
-      role: ['Client', Validators.required],
-      email: ['', [
-        Validators.required,
-        Validators.email
-      ]],
-      login: ['', Validators.required],
       password: ['',[
         Validators.required,
         Validators.minLength(this.passLength-6),
         Validators.maxLength(this.passLength)
       ]],
+      address: ['', Validators.required],
+      myOrders: [null],
+      latitude: [null],
+      longitude: [null],
+      placeOfWork: [null],
+      role: [{id: null, roleName:'client'}],
+      // email: ['', [
+      //   Validators.required,
+      //   Validators.email
+      // ]],
+      working: [false],
       passwordRepeat: ['', Validators.required]
     }, {validator: this.matchValidator('password', 'passwordRepeat')})
   }
@@ -69,17 +73,30 @@ export class SignupComponent implements OnInit {
   submit() {
     if(this.formUserReg.valid) {
       const newUserData = {...this.formUserReg.value}
-      newUserData.telephoneNumber = Number(newUserData.telephoneNumber)
-      console.log(newUserData)
+      let resultData = {...newUserData}
+      let registeredUser: any
+      Object.keys(resultData).forEach((key: any) => {
+        if (key == 'passwordRepeat')
+          delete resultData[key]
+      })
+      // console.log(JSON.stringify(resultData))
+      // console.log(resultData)
+      this.usersService.signupUser(resultData).subscribe({
+        next: (msg) => {
+          console.log(msg)
+          registeredUser = msg
+        },
+        error: (err) => {
+          console.log('error', err)
+        },
+        complete: () => {
+          this.authService.login(newUserData.telephone, newUserData.password)
+        }
+      })
+      console.log(registeredUser)
       this.formUserReg.reset()
-      this.authService.login(newUserData.login)
     }
   }
   showCon() {
-    console.log(this.formUserReg.get('passwordRepeat'))
-    console.log(this.formUserReg.get('password')?.value)
-    console.log(this.formUserReg.get('passwordRepeat')?.value)
-    if (this.formUserReg.get('password')?.value != this.formUserReg.get('passwordRepeat')?.value)
-      console.log('wrong')
   }
 }

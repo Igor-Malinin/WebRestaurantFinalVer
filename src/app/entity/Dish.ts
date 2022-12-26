@@ -7,5 +7,5 @@ export class Dish {
   weight: number
   calories: number
   amount: number = 0
-  menu_id: number
+  menu: any
 }

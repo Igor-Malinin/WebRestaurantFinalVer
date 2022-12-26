@@ -3,6 +3,7 @@ import {Drink} from "./Drink";
 
 
 export class Menu {
-  id?: number
-  category: Dish | Drink
+  id: number
+  dishes: any
+  drinks: any
 }

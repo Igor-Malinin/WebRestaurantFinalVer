@@ -1,7 +1,9 @@
 @use "src/styles";
 
 .restaurants__container {
+  min-height: 45vh;
   margin-top: 220px;
+  margin-bottom: 30px;
 }
 
 .restaurants__cards {

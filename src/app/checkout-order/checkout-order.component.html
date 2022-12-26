@@ -1,1 +1,265 @@
-<p>checkout-order works!</p>
+<div class="wrapper">
+  <div class="paige__container">
+    <div class="main-style-box">
+      <div class="toggle-btns">
+        <button class="btn" (click)="hallDelToggle = true" [ngClass]="{
+        'active-btn': hallDelToggle
+        }">Заказ в зале</button>
+        <button class="btn" (click)="hallDelToggle = false" [ngClass]="{
+        'active-btn': !hallDelToggle
+        }">Заказ на доставку</button>
+      </div>
+
+<!--      Форма заказа в зале-->
+      <div class="checkout__box" *ngIf="hallDelToggle">
+        <form class="checkout-order__form" [formGroup]="formCheckoutOrderHall" (ngSubmit)="submit()">
+<!--          <div class="info-with-card-flex">-->
+            <div class="form-elements">
+              <div class="checkout-order__form-control">
+                <div class="label-input__flex">
+                  <label class="label-text">Фамилия Имя</label>
+                  <input type="text" class="input-text" formControlName="fio" style="width: 230px">
+                </div>
+                <div
+                  *ngIf="formCheckoutOrderHall.get('fio')?.invalid && formCheckoutOrderHall.get('fio')?.touched"
+                  class="validation"
+                >
+                  <small>Заполните поле</small>
+                </div>
+              </div>
+              <div class="checkout-order__form-control">
+                <div class="label-input__flex">
+                  <label class="label-text">Номер телефона</label>
+                  <input type="text" class="input-text" formControlName="telephoneNumber">
+                </div>
+                <div
+                  *ngIf="formCheckoutOrderHall.get('telephoneNumber')?.invalid && formCheckoutOrderHall.get('telephoneNumber')?.touched"
+                  class="validation"
+                >
+                  <small *ngIf="formCheckoutOrderHall.get('telephoneNumber')?.errors?.['required']">
+                    Заполните поле
+                  </small>
+                  <small *ngIf="formCheckoutOrderHall.get('telephoneNumber')?.hasError('minlength')">
+                    Введите телефон длиной {{formCheckoutOrderHall.get('telephoneNumber')?.errors?.['minlength'].requiredLength}} символов.
+                    Вы ввели {{formCheckoutOrderHall.get('telephoneNumber')?.errors?.['minlength'].actualLength}}.
+                  </small>
+                  <small *ngIf="formCheckoutOrderHall.get('telephoneNumber')?.hasError('maxlength')">
+                    Введите телефон длиной {{formCheckoutOrderHall.get('telephoneNumber')?.errors?.['maxlength'].requiredLength}} символов.
+                    Вы ввели {{formCheckoutOrderHall.get('telephoneNumber')?.errors?.['maxlength'].actualLength}}.
+                  </small>
+                </div>
+              </div>
+              <div class="checkout-order__form-control">
+                <div class="label-input__flex">
+                  <label class="label-text">Дата бронирования</label>
+                  <input type="date" class="input-text" formControlName="date">
+                </div>
+                <div
+                  *ngIf="formCheckoutOrderHall.get('date')?.invalid && formCheckoutOrderHall.get('date')?.touched"
+                  class="validation"
+                >
+                  <small>Заполните поле</small>
+                </div>
+              </div>
+              <div class="checkout-order__form-control">
+                <div class="label-input__flex">
+                  <label class="label-text">Время бронирования</label>
+                  <input type="time" class="input-text" formControlName="timeStart">
+                </div>
+                <div
+                  *ngIf="formCheckoutOrderHall.get('timeStart')?.invalid && formCheckoutOrderHall.get('timeStart')?.touched"
+                  class="validation"
+                >
+                  <small>Заполните поле</small>
+                </div>
+              </div>
+              <div class="checkout-order__form-control">
+                <div class="label-input__flex">
+                  <label class="label-text">Количество мест</label>
+                  <input type="text" class="input-text short" formControlName="amountOfPlaces">
+                </div>
+                <div
+                  *ngIf="formCheckoutOrderHall.get('amountOfPlaces')?.invalid && formCheckoutOrderHall.get('amountOfPlaces')?.touched"
+                  class="validation"
+                >
+                  <small>Заполните поле</small>
+                </div>
+              </div>
+              <div class="checkout-order__form-control">
+                <div class="label-input__flex">
+                  <label class="label-text">Столик №</label>
+                  <input type="text" class="input-text short" formControlName="table">
+                  <a class="link-text scheme-link" (click)="hallSchemeToggle = !hallSchemeToggle">Открыть схему зала</a>
+                </div>
+                <div
+                  *ngIf="formCheckoutOrderHall.get('table')?.invalid && formCheckoutOrderHall.get('table')?.touched"
+                  class="validation"
+                >
+                  <small>Заполните поле</small>
+                </div>
+              </div>
+
+              <div class="hall-scheme" *ngIf="hallSchemeToggle">
+                Здесь будет схема зала
+              </div>
+
+              <div class="checkout-order__form-control">
+                <div class="label-input__flex">
+                  <label class="label-text">Комментарий</label>
+                  <input type="text" class="input-text" formControlName="comment">
+                </div>
+              </div>
+
+            </div>
+
+<!--            <div class="card-info">-->
+<!--              <h2 class="card-title">Данные карты</h2>-->
+
+<!--              <div class="card">-->
+<!--                <input type="text" class="card-number" placeholder="Номер карты">-->
+<!--                <div class="label-input__flex">-->
+<!--                  <label class="label-text">Действует</label>-->
+<!--                  <input type="text" class="card-validity" placeholder="До">-->
+<!--                </div>-->
+<!--                <div class="label-input__flex">-->
+<!--                  <label class="label-text">Владелец</label>-->
+<!--                  <input type="text" class="card-owner" placeholder="Имя Фамилия">-->
+<!--                </div>-->
+<!--                <div class="label-input__flex cvv">-->
+<!--                  <label class="label-text">CVV</label>-->
+<!--                  <input type="text" class="card-cvv" placeholder="3 цифры">-->
+<!--                </div>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+
+          <button class="btn checkout__btn" type="submit" [disabled]="formCheckoutOrderHall.invalid">Оформить</button>
+        </form>
+      </div>
+<!--      Конец формы заказа в зале-->
+
+<!--      Форма заказа на доставку-->
+      <div class="checkout__box" *ngIf="!hallDelToggle">
+        <form class="checkout-order__form" [formGroup]="formCheckoutOrderDelivery" (ngSubmit)="submit()">
+<!--          <div class="info-with-card-flex">-->
+            <div class="form-elements">
+              <div class="checkout-order__form-control">
+                <div class="label-input__flex">
+                  <label class="label-text">Фамилия Имя</label>
+                  <input type="text" class="input-text" formControlName="fio" style="width: 230px">
+                </div>
+                <div
+                  *ngIf="formCheckoutOrderDelivery.get('fio')?.invalid && formCheckoutOrderDelivery.get('fio')?.touched"
+                  class="validation"
+                >
+                  <small>Заполните поле</small>
+                </div>
+              </div>
+              <div class="checkout-order__form-control">
+                <div class="label-input__flex">
+                  <label class="label-text">Номер телефона</label>
+                  <input type="text" class="input-text" formControlName="telephoneNumber">
+                </div>
+                <div
+                  *ngIf="formCheckoutOrderDelivery.get('telephoneNumber')?.invalid && formCheckoutOrderDelivery.get('telephoneNumber')?.touched"
+                  class="validation"
+                >
+                  <small *ngIf="formCheckoutOrderDelivery.get('telephoneNumber')?.errors?.['required']">
+                    Заполните поле
+                  </small>
+                  <small *ngIf="formCheckoutOrderDelivery.get('telephoneNumber')?.hasError('minlength')">
+                    Введите телефон длиной {{formCheckoutOrderDelivery.get('telephoneNumber')?.errors?.['minlength'].requiredLength}} символов.
+                    Вы ввели {{formCheckoutOrderDelivery.get('telephoneNumber')?.errors?.['minlength'].actualLength}}.
+                  </small>
+                  <small *ngIf="formCheckoutOrderDelivery.get('telephoneNumber')?.hasError('maxlength')">
+                    Введите телефон длиной {{formCheckoutOrderDelivery.get('telephoneNumber')?.errors?.['maxlength'].requiredLength}} символов.
+                    Вы ввели {{formCheckoutOrderDelivery.get('telephoneNumber')?.errors?.['maxlength'].actualLength}}.
+                  </small>
+                </div>
+              </div>
+              <div class="checkout-order__form-control">
+                <div class="label-input__flex">
+                  <label class="label-text">Адрес доставки</label>
+                  <input type="text" class="input-text" formControlName="address">
+                </div>
+                <div
+                  *ngIf="formCheckoutOrderDelivery.get('address')?.invalid && formCheckoutOrderDelivery.get('address')?.touched"
+                  class="validation"
+                >
+                  <small>Заполните поле</small>
+                </div>
+              </div>
+              <div class="checkout-order__form-control">
+                <div class="label-input__flex">
+                  <label class="label-text">Дата доставки</label>
+                  <input type="date" class="input-text" formControlName="date">
+                </div>
+                <div
+                  *ngIf="formCheckoutOrderDelivery.get('date')?.invalid && formCheckoutOrderDelivery.get('date')?.touched"
+                  class="validation"
+                >
+                  <small>Заполните поле</small>
+                </div>
+              </div>
+              <div class="checkout-order__form-control">
+                <div class="label-input__flex">
+                  <label class="label-text">Время доставки</label>
+                  <div class="checkboxs">
+                    <div class="checkbox">
+                      <input class="checkbox-input" type="checkbox" id="hall" value="coding" (change)="checkedTime = !checkedTime; checkedFaster = !checkedFaster" [checked]="checkedFaster">
+                      <label class="checkbox-label" for="hall">Поскорее</label>
+                    </div>
+                    <div class="checkbox">
+                      <input class="checkbox-input" type="checkbox" id="delivery" value="delivery" (change)="checkedFaster = !checkedFaster; checkedTime = !checkedTime" [checked]="checkedTime">
+                      <label class="checkbox-label" for="delivery">Ко времени</label>
+                    </div>
+                    <input type="time" class="input-text" formControlName="time" *ngIf="checkedTime">
+                  </div>
+
+                </div>
+                <div
+                  *ngIf="formCheckoutOrderDelivery.get('time')?.invalid && formCheckoutOrderDelivery.get('time')?.touched"
+                  class="validation"
+                >
+                  <small>Заполните поле</small>
+                </div>
+              </div>
+              <div class="checkout-order__form-control">
+                <div class="label-input__flex">
+                  <label class="label-text">Комментарий</label>
+                  <input type="text" class="input-text" formControlName="comment">
+                </div>
+              </div>
+
+            </div>
+
+<!--            <div class="card-info">-->
+<!--              <h2 class="card-title">Данные карты</h2>-->
+
+<!--              <div class="card">-->
+<!--                <input type="text" class="card-number" placeholder="Номер карты">-->
+<!--                <div class="label-input__flex">-->
+<!--                  <label class="label-text">Действует</label>-->
+<!--                  <input type="text" class="card-validity" placeholder="До">-->
+<!--                </div>-->
+<!--                <div class="label-input__flex">-->
+<!--                  <label class="label-text">Владелец</label>-->
+<!--                  <input type="text" class="card-owner" placeholder="Имя Фамилия">-->
+<!--                </div>-->
+<!--                <div class="label-input__flex cvv">-->
+<!--                  <label class="label-text">CVV</label>-->
+<!--                  <input type="text" class="card-cvv" placeholder="3 цифры">-->
+<!--                </div>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+
+          <button class="btn checkout__btn" type="submit" [disabled]="formCheckoutOrderDelivery.invalid">Оформить</button>
+        </form>
+
+      </div>
+<!--      Конец формы доставки-->
+
+    </div>
+  </div>
+</div>

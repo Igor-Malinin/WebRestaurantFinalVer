@@ -18,6 +18,8 @@ import { UserspageComponent } from './userspage/userspage.component';
 import { ReferenceComponent } from './reference/reference.component';
 import { ContactsComponent } from './contacts/contacts.component';
 import { CheckoutOrderComponent } from './checkout-order/checkout-order.component';
+import { BasketComponent } from './basket/basket.component';
+import { CourierOrdersComponent } from './courier-orders/courier-orders.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +35,9 @@ import { CheckoutOrderComponent } from './checkout-order/checkout-order.componen
     UserspageComponent,
     ReferenceComponent,
     ContactsComponent,
-    CheckoutOrderComponent
+    CheckoutOrderComponent,
+    BasketComponent,
+    CourierOrdersComponent
   ],
   imports: [
     BrowserModule,

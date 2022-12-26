@@ -7,5 +7,5 @@ export class Drink {
   priceOfBottle: number
   volume: number
   amount: number = 0
-  menu_id: number
+  menu: any
 }

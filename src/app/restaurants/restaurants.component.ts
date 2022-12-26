@@ -11,6 +11,7 @@ import {CookieService} from "ngx-cookie-service";
 export class RestaurantsComponent implements OnInit {
 
   role: string = ''
+  restaurants: Restaurant[] = []
 
   constructor(
     public restaurantsService: RestaurantsService,
@@ -20,8 +21,31 @@ export class RestaurantsComponent implements OnInit {
 
   ngOnInit(): void {
     this.role = this.cookieService.get('role')
+    this.restaurantsService.getRestaurants().subscribe({
+      next: (msg) => {
+        console.log(msg.body)
+        this.restaurants = JSON.parse(String(msg.body))
+      },
+      error: (err) => {
+        console.log('error', err)
+      },
+      complete: () => {}
+    })
   }
 
+  getRestaurants() {
+    return this.restaurantsService.restaurants
+  }
 
-
+  showCon() {
+    this.restaurantsService.getRestaurants().subscribe({
+      next: (msg) => {
+        console.log(msg)
+      },
+      error: (err) => {
+        console.log('error', err)
+      },
+      complete: () => {}
+    })
+  }
 }

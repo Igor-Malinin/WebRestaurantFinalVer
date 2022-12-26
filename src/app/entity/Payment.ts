@@ -1,6 +1,6 @@
 export class Payment {
   id: number
-  status: boolean
+  isDone: boolean
   date: string
   price: number
 }

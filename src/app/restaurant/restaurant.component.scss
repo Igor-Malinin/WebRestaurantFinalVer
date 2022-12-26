@@ -190,6 +190,40 @@
   text-align: center;
 }
 
+.label-input-flex {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  margin-bottom: 20px;
+}
+.edit__input {
+
+}
+.edit-title {
+  height: 70px;
+  width: 350px;
+  font-size: 45px;
+  font-weight: 500;
+  padding: 5px 20px;
+}
+
+.add-dish-drink-field {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.new-dish-drink-flex-inputs {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+.btn-add {
+  align-self: center;
+}
+
+
 @media (max-width: 980px) {
   .restaurants__wrap {
     width: 800px;

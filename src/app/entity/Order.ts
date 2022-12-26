@@ -1,11 +1,16 @@
+import {Restaurant} from "./Restaurant";
+import {User} from "./User";
+import {TableInRestaurant} from "./TableInRestaurant";
+
 export class Order {
   id: number
-  number: number
-  restaurantId: number
-  restaurantName: string
-  address: string
-  date: string
-  telephone: number
-  price: number
-  status: string
+  restaurant: any
+  user: User
+  needDelivery: boolean
+  orderedTime: any
+  seatNumber: any
+  isDone: any
+  dishes: any
+  drinks: any
+  // address: string
 }

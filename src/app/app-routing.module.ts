@@ -11,6 +11,8 @@ import {OrdersComponent} from "./orders/orders.component";
 import {UserspageComponent} from "./userspage/userspage.component";
 import {ReferenceComponent} from "./reference/reference.component";
 import {ContactsComponent} from "./contacts/contacts.component";
+import {CheckoutOrderComponent} from "./checkout-order/checkout-order.component";
+import {BasketComponent} from "./basket/basket.component";
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -23,6 +25,8 @@ const routes: Routes = [
   {path: 'userspage', component: UserspageComponent},
   {path: 'reference', component: ReferenceComponent},
   {path: 'contacts', component: ContactsComponent},
+  {path: 'checkoutorder', component: CheckoutOrderComponent},
+  {path: 'basket', component: BasketComponent},
 
   {path: 'error', component: ErrorPageComponent},
   {path: '**', redirectTo: '/error'}

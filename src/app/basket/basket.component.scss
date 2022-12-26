@@ -1,0 +1,38 @@
+@use "src/styles";
+
+.paige__container {
+  min-height: 45vh;
+}
+
+.main-style-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.basket-orders {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.order-elements {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.order-element {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 20px;
+  border: 2px solid styles.$border-color-superlightgrey;
+  border-radius: 5px;
+  box-shadow: inset 0 0 20px 6px styles.$back-color-dark;
+  background: styles.$back-color-light;
+}
+
+

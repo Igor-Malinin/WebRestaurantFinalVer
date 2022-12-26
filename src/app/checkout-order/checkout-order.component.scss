@@ -1,0 +1,182 @@
+@use "src/styles";
+
+.paige__container {
+  display: flex;
+  justify-content: center;
+}
+
+.main-style-box {
+  width: 70%;
+}
+
+.toggle-btns {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  .btn {
+    z-index: 1;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+  .active-btn {
+    //background-color: rgba(170, 255, 142, 0.2);
+    border-top-color: styles.$active-border-color;
+    border-bottom: 2px solid styles.$back-color-light;
+    &:hover {
+      border-top-color: rgba(170, 255, 142, 0.8);
+    }
+  }
+}
+
+.checkout__box {
+  position: relative;
+  top: -2px;
+  padding: 15px;
+  border: 2px solid styles.$border-color-superlightgrey;
+  border-radius: 5px;
+}
+
+.checkout-order__form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  .info-with-card-flex {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+    gap: 30px;
+  }
+}
+
+.form-elements {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 15px;
+}
+
+.label-input__flex {
+  display: flex;
+  align-items: center;
+  .label-text {
+    width: 220px;
+  }
+  .checkboxs {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 20px;
+    .checkbox {
+      .checkbox-input {
+        margin-left: 2px;
+      }
+      .checkbox-label {
+        margin-left: 7px;
+      }
+    }
+  }
+}
+
+.short {
+  width: 50px;
+}
+
+.scheme-link {
+  position: relative;
+  padding: 2px 0;
+  border-top: 1px solid styles.$links-color;
+  border-bottom: 1px solid styles.$links-color;
+  color: styles.$links-color;
+  margin-left: 30px;
+  cursor: pointer;
+  &:hover {
+    border-top: 2px solid rgba(234, 162, 12, 0.79);
+    border-bottom: 2px solid rgba(234, 162, 12, 0.79);
+    color: rgba(234, 162, 12, 0.79);
+  }
+  &:active {
+    top: 2px;
+  }
+}
+
+.hall-scheme {
+  border: 2px solid styles.$border-color-superlightgrey;
+  border-radius: 5px;
+  background-color: styles.$back-color-dark;
+  padding: 50px;
+}
+
+.checkout__btn {
+  align-self: flex-end;
+}
+
+@media (max-width: 980px) {
+  .main-style-box {
+    width: 85%;
+  }
+  .label-input__flex {
+    .checkboxs {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 10px;
+    }
+  }
+}
+
+@media (max-width: 767.98px) {
+  .main-style-box {
+    width: 92%;
+  }
+  .label-input__flex {
+    .checkboxs {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 10px;
+    }
+  }
+}
+
+//.card-info {
+//  border: 2px solid styles.$border-color-superlightgrey;
+//  border-radius: 5px;
+//  padding: 20px;
+//  background-color: #4c5445;
+//  .card-title {
+//    margin-bottom: 20px;
+//  }
+//  .card {
+//    display: flex;
+//    flex-direction: column;
+//    gap: 10px;
+//    .label-input__flex {
+//      align-self: flex-end;
+//      .label-text {
+//        text-align: right;
+//        width: 90px;
+//        margin-right: 10px;
+//      }
+//      .card-validity {
+//        width: 100px;
+//      }
+//      .card-owner {
+//        width: 180px;
+//      }
+//      .card-cvv {
+//        width: 100px;
+//      }
+//    }
+//    input {
+//      text-align: center;
+//    }
+//    .to-items-together {
+//      display: flex;
+//      gap: 10px;
+//    }
+//    .cvv {
+//      align-self: flex-end;
+//    }
+//  }
+//}
+

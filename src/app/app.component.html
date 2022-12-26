@@ -16,7 +16,7 @@
           <li class="header__item">
             <a [routerLink]="['/restaurants']" class="header__link">Выбор ресторана</a>
           </li>
-          <li class="header__item" *ngIf="role == 'Admin'">
+          <li class="header__item" *ngIf="role == 'admin'">
             <a href="#" class="header__link" [routerLink]="['/userspage']">Пользователи</a>
           </li>
           <li class="header__item" *ngIf="isAuth()">
@@ -29,7 +29,7 @@
             <li class="header__item">
               <div class="authorized-header-basket">
                 <button class="btn btn-logout" (click)="logout()">Выйти</button>
-<!--                <a class="basket-link">Корзина <img class="basket-img" src="assets/images/basket_icon.png" alt="K"></a>-->
+                <a class="basket-link" [routerLink]="['/basket']">В корзине: {{amountInBasket}} <img class="basket-img" src="assets/images/basket_icon.png" alt="K"></a>
               </div>
             </li>
           </ng-template>

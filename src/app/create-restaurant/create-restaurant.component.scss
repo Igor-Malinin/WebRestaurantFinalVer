@@ -22,8 +22,27 @@
   background: styles.$back-color-light;
 }
 
-.create__input {
+.tables-contorl-btns {
   width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.numberOfSeats-array {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 15px;
+}
+.flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.create__input {
   font-size: 18px;
   padding: 10px;
   color: styles.$text-color-light;
@@ -67,9 +86,6 @@
 .create__btn {
   align-self: center;
   width: max-content;
-}
-.add-btn {
-  margin-top: 20px;
 }
 
 .new-dish-drink {

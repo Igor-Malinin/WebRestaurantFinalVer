@@ -23,30 +23,21 @@
         </div>
       </div>
       <div class="reg__form-control">
-        <input type="text" name="cPat" class="reg__input" placeholder="Отчество" formControlName="patronymic">
+        <input type="text" name="telephone" class="reg__input" placeholder="Телефон" formControlName="telephone">
         <div
-          *ngIf="formUserReg.get('patronymic')?.invalid && formUserReg.get('patronymic')?.touched"
+          *ngIf="formUserReg.get('telephone')?.invalid && formUserReg.get('telephone')?.touched"
           class="validation"
         >
-          <small>Поле не может быть пустым</small>
-        </div>
-      </div>
-      <div class="reg__form-control">
-        <input type="text" name="telephoneNumber" class="reg__input" placeholder="Телефон" formControlName="telephoneNumber">
-        <div
-          *ngIf="formUserReg.get('telephoneNumber')?.invalid && formUserReg.get('telephoneNumber')?.touched"
-          class="validation"
-        >
-          <small *ngIf="formUserReg.get('telephoneNumber')?.errors?.['required']">
+          <small *ngIf="formUserReg.get('telephone')?.errors?.['required']">
             Поле не может быть пустым
           </small>
-          <small *ngIf="formUserReg.get('telephoneNumber')?.hasError('minlength')">
-            Введите телефон длиной {{formUserReg.get('telephoneNumber')?.errors?.['minlength'].requiredLength}} символов.
-            Вы ввели {{formUserReg.get('telephoneNumber')?.errors?.['minlength'].actualLength}}.
+          <small *ngIf="formUserReg.get('telephone')?.hasError('minlength')">
+            Введите телефон длиной {{formUserReg.get('telephone')?.errors?.['minlength'].requiredLength}} символов.
+            Вы ввели {{formUserReg.get('telephone')?.errors?.['minlength'].actualLength}}.
           </small>
-          <small *ngIf="formUserReg.get('telephoneNumber')?.hasError('maxlength')">
-            Введите телефон длиной {{formUserReg.get('telephoneNumber')?.errors?.['maxlength'].requiredLength}} символов.
-            Вы ввели {{formUserReg.get('telephoneNumber')?.errors?.['maxlength'].actualLength}}.
+          <small *ngIf="formUserReg.get('telephone')?.hasError('maxlength')">
+            Введите телефон длиной {{formUserReg.get('telephone')?.errors?.['maxlength'].requiredLength}} символов.
+            Вы ввели {{formUserReg.get('telephone')?.errors?.['maxlength'].actualLength}}.
           </small>
         </div>
       </div>
@@ -59,29 +50,20 @@
           <small>Поле не может быть пустым</small>
         </div>
       </div>
-      <div class="reg__form-control">
-        <input type="text" name="email" class="reg__input" placeholder="E-mail" formControlName="email">
-        <div
-          *ngIf="formUserReg.get('email')?.invalid && formUserReg.get('email')?.touched"
-          class="validation"
-        >
-          <small *ngIf="formUserReg.get('email')?.errors?.['required']">
-            Поле не может быть пустым
-          </small>
-          <small *ngIf="formUserReg.get('email')?.errors?.['email']">
-            Введите корректный E-mail
-          </small>
-        </div>
-      </div>
-      <div class="reg__form-control">
-        <input type="text" name="cLog" class="reg__input" placeholder="Логин" formControlName="login">
-        <div
-          *ngIf="formUserReg.get('login')?.invalid && formUserReg.get('login')?.touched"
-          class="validation"
-        >
-          <small>Поле не может быть пустым</small>
-        </div>
-      </div>
+<!--      <div class="reg__form-control">-->
+<!--        <input type="text" name="email" class="reg__input" placeholder="E-mail" formControlName="email">-->
+<!--        <div-->
+<!--          *ngIf="formUserReg.get('email')?.invalid && formUserReg.get('email')?.touched"-->
+<!--          class="validation"-->
+<!--        >-->
+<!--          <small *ngIf="formUserReg.get('email')?.errors?.['required']">-->
+<!--            Поле не может быть пустым-->
+<!--          </small>-->
+<!--          <small *ngIf="formUserReg.get('email')?.errors?.['email']">-->
+<!--            Введите корректный E-mail-->
+<!--          </small>-->
+<!--        </div>-->
+<!--      </div>-->
       <div class="reg__form-control">
         <input type="text" name="password" class="reg__input" placeholder="Пароль" formControlName="password">
         <div

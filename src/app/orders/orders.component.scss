@@ -5,7 +5,7 @@
   display: flex;
   justify-content: center;
   margin-top: 220px;
-  margin-bottom: 30px;
+  margin-bottom: 60px;
 }
 
 .orders-box-admin {
@@ -20,20 +20,17 @@
   background: styles.$back-color-light;
   .toggle-btns {
     .btn {
-      border: 3px solid styles.$border-color-superlightgrey;
+      z-index: 1;
+      border: 2px solid styles.$border-color-superlightgrey;
       border-radius: 0;
       border-top-left-radius: 5px;
       border-top-right-radius: 5px;
-      border-bottom: none;
     }
     .active-btn {
-      background-color: rgba(170, 255, 142, 0.2);
-      border-right-color: rgba(170, 255, 142, 1);
-      border-left-color: rgba(170, 255, 142, 1);
+      border-top-color: styles.$active-border-color;
+      border-bottom-color: styles.$back-color-light;
       &:hover {
-        background-color: rgba(170, 255, 142, 0.3);
-        border-right-color: rgba(170, 255, 142, 0.8);
-        border-left-color: rgba(170, 255, 142, 0.8);
+        border-top-color: rgba(170, 255, 142, 0.8);
       }
     }
   }
@@ -245,9 +242,12 @@
 }
 
 .orders__table {
-  border: 1px solid styles.$border-color-superlightgrey;
+  position: relative;
+  top: -2px;
+  border: 2px solid styles.$border-color-superlightgrey;
   text-align: center;
   border-collapse: separate;
+  padding: 15px;
   border-radius: 5px;
   th, td {
     padding: 10px;
@@ -294,15 +294,20 @@
     }
   }
 }
-.table_row:first-child th:first-child {
-  border-top-left-radius: 4px;
+
+.table_row:first-child {
+  th:first-child {
+    border-top-left-radius: 4px;
+  }
+  th:last-child {
+    border-top-right-radius: 4px;
+  }
 }
-.table_row:first-child th:last-child {
-  border-top-right-radius: 4px;
-}
-.table_row:last-child td:first-child {
-  border-bottom-left-radius: 4px;
-}
-.table_row:last-child td:last-child {
-  border-bottom-right-radius: 4px;
+.table_row:last-child {
+  td:first-child {
+    border-bottom-left-radius: 4px;
+  }
+  td:last-child {
+    border-bottom-right-radius: 4px;
+  }
 }

@@ -1,29 +1,55 @@
 import { Injectable } from '@angular/core';
 import {Order} from "../entity/Order";
 import {OrderHall} from "../entity/OrderHall";
+import {Restaurant} from "../entity/Restaurant";
+import {User} from "../entity/User";
+import {TableInRestaurant} from "../entity/TableInRestaurant";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {AuthTokens} from "../entity/AuthTokens";
+import {CookieService} from "ngx-cookie-service";
+
+const API_URL: string = 'http://localhost:8080'
 
 @Injectable({
   providedIn: 'root'
 })
 export class OrdersService {
+
+  authTokens: AuthTokens = {
+    access_token: this.cookieService.get('access_token'),
+    refresh_token: this.cookieService.get('refresh_token')
+  }
+
   orders: Order[] = [
-    {id: 0, number: 1, restaurantId: 0, telephone: 9231213273, address: 'улица доставки', restaurantName: 'Русская кухня', date: `${this.padTo2Digits(new Date().getDate())}.${this.padTo2Digits(new Date().getMonth())}.${String(new Date().getFullYear())} / ${String(new Date().getHours())}:${String(new Date().getMinutes())}`, price: 12000, status: 'готовится'},
-    {id: 1, number: 2, restaurantId: 0, telephone: 9231213273, address: 'улица доставки', restaurantName: 'Русская кухня', date: `${this.padTo2Digits(new Date().getDate())}.${this.padTo2Digits(new Date().getMonth())}.${String(new Date().getFullYear())} / ${String(new Date().getHours())}:${String(new Date().getMinutes())}`, price: 24000, status: 'доставляется'},
-    {id: 2, number: 3, restaurantId: 1, telephone: 9231213273, address: 'улица доставки', restaurantName: 'Американская кухня', date: `${this.padTo2Digits(new Date().getDate())}.${this.padTo2Digits(new Date().getMonth())}.${String(new Date().getFullYear())} / ${String(new Date().getHours())}:${String(new Date().getMinutes())}`, price: 30500, status: 'обрабатывается'},
-    {id: 3, number: 4, restaurantId: 1, telephone: 9231213273, address: 'улица доставки', restaurantName: 'Американская кухня', date: `${this.padTo2Digits(new Date().getDate())}.${this.padTo2Digits(new Date().getMonth())}.${String(new Date().getFullYear())} / ${String(new Date().getHours())}:${String(new Date().getMinutes())}`, price: 5700, status: 'доставлен'},
+    {id: 0, restaurant: 'Русская кухня', user: new User(), needDelivery: false, orderedTime: new Date(), seatNumber: 2, isDone: 'Готовится', dishes: '', drinks: ''},
+    {id: 1, restaurant: 'Грузинская кухня', user: new User(), needDelivery: false, orderedTime: new Date(), seatNumber: 4, isDone: 'Доставляется', dishes: '', drinks: ''},
+    {id: 2, restaurant: 'Японская кухня', user: new User(), needDelivery: false, orderedTime: new Date(), seatNumber: 7, isDone: 'Доставлен', dishes: '', drinks: ''},
+    {id: 3, restaurant: 'Китайская кухня', user: new User(), needDelivery: false, orderedTime: new Date(), seatNumber: 8, isDone: 'Обрабатывается', dishes: '', drinks: ''},
+  ]
+  ordersHall: Order[] = [
+    {id: 0, restaurant: 'Русская кухня', user: new User(), needDelivery: false, orderedTime: new Date(), seatNumber: 2, isDone: 'Готовится', dishes: '', drinks: ''},
+    {id: 1, restaurant: 'Грузинская кухня', user: new User(), needDelivery: false, orderedTime: new Date(), seatNumber: 4, isDone: 'Принят', dishes: '', drinks: ''},
+    {id: 2, restaurant: 'Японская кухня', user: new User(), needDelivery: false, orderedTime: new Date(), seatNumber: 7, isDone: 'Обрабатывается', dishes: '', drinks: ''},
+    {id: 3, restaurant: 'Китайская кухня', user: new User(), needDelivery: false, orderedTime: new Date(), seatNumber: 8, isDone: 'Готов', dishes: '', drinks: ''},
   ]
 
-  ordersHall: OrderHall[] = [
-    {id: 0, number: 1, restaurantId: 0, telephone: 9231213273, amountOfPlaces: 8, table: 9, restaurantName: 'Русская кухня', date: `${this.padTo2Digits(new Date().getDate())}.${this.padTo2Digits(new Date().getMonth())}.${String(new Date().getFullYear())} / ${String(new Date().getHours())}:${String(new Date().getMinutes())}`, price: 12000, status: 'готовится'},
-    {id: 1, number: 2, restaurantId: 0, telephone: 9231213273, amountOfPlaces: 2, table: 4, restaurantName: 'Русская кухня', date: `${this.padTo2Digits(new Date().getDate())}.${this.padTo2Digits(new Date().getMonth())}.${String(new Date().getFullYear())} / ${String(new Date().getHours())}:${String(new Date().getMinutes())}`, price: 24000, status: 'готов'},
-    {id: 2, number: 3, restaurantId: 1, telephone: 9231213273, amountOfPlaces: 4, table: 13, restaurantName: 'Американская кухня', date: `${this.padTo2Digits(new Date().getDate())}.${this.padTo2Digits(new Date().getMonth())}.${String(new Date().getFullYear())} / ${String(new Date().getHours())}:${String(new Date().getMinutes())}`, price: 30500, status: 'обрабатывается'},
-    {id: 3, number: 4, restaurantId: 1, telephone: 9231213273, amountOfPlaces: 16, table: 6, restaurantName: 'Американская кухня', date: `${this.padTo2Digits(new Date().getDate())}.${this.padTo2Digits(new Date().getMonth())}.${String(new Date().getFullYear())} / ${String(new Date().getHours())}:${String(new Date().getMinutes())}`, price: 5700, status: 'готов'},
-  ]
 
-  constructor() {
+  constructor(
+    private cookieService: CookieService,
+    private http: HttpClient
+  ) {
   }
 
   padTo2Digits(num: number) {
     return num.toString().padStart(2, '0');
+  }
+
+  addOrder(order: Order) {
+    let headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + this.authTokens.access_token
+    })
+
+    return this.http.post(API_URL + '/test/addOrder', JSON.stringify(order), {headers: headers})
   }
 }

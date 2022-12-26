@@ -11,6 +11,7 @@ import {CookieService} from "ngx-cookie-service";
 export class AppComponent implements OnInit{
   title = 'FrontRestaurant';
   isAuthenticated: boolean = false
+  amountInBasket: number = 0
   role: string = ''
 
   constructor(
@@ -23,6 +24,14 @@ export class AppComponent implements OnInit{
       this.isAuthenticated = (this.cookieService.get('isAuthenticated') == 'OK')
       this.authService.setAuth(this.isAuthenticated)
       this.role = this.cookieService.get('role')
+      if (this.cookieService.get('dishes')) {
+        let amountDishes = JSON.parse(this.cookieService.get('dishes')).length
+        this.amountInBasket += amountDishes
+      }
+      if (this.cookieService.get('drinks')) {
+        let amountDrinks = JSON.parse(this.cookieService.get('drinks')).length
+        this.amountInBasket += amountDrinks
+      }
     }
   }
   isAuth(): boolean {
