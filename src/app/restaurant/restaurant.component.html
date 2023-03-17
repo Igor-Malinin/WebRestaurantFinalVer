@@ -41,14 +41,15 @@
               </div>
               <div class="menu__dish-drink-cards">
                 <div class="menu__dish-drink-card" *ngIf="!editToggle">
-                  <ul class="menu__dish-drink-list" *ngFor="let dish of sortedDishes; let i = index">
-                    <li class="item-title">{{dish.name}}</li>
-                    <li class="item-title">{{dish.category}}</li>
-                    <li class="item-title">{{dish.description}}</li>
-                    <li><b>Цена: </b>{{dish.price}}</li>
-                    <li><b>Вес: </b>{{dish.weight}}</li>
-                    <li class="last-item"><b>Калории: </b>{{dish.calories}}</li>
-                    <li class="inc-dec__item">
+                  <ul class="menu__dish-drink-list"  *ngFor="let dish of sortedDishes; let i = index">
+<!--                    style="background: url('https://recept-borscha.ru/wp-content/uploads/e/5/5/e553c4afca5f1895f309de671a2167fb.jpeg') no-repeat center ; background-size: cover;"-->
+                    <li class="with-back item-title">{{dish.name}}</li>
+                    <li class="with-back item-title">{{dish.category}}</li>
+                    <li class="with-back item-title">{{dish.description}}</li>
+                    <li class="with-back "><b>Цена: </b>{{dish.price}}</li>
+                    <li class="with-back "><b>Вес: </b>{{dish.weight}}</li>
+                    <li class="with-back last-item"><b>Калории: </b>{{dish.calories}}</li>
+                    <li class="with-back inc-dec__item">
                       <button type="button" class="btn btn-inc-dec" [disabled]="getSortedDishes()[i].amount == 0" (click)="decValDish(i)">-</button>
                       <input class="input-to-basket" type="text" [(ngModel)]="sortedDishes[i].amount">
                       <button type="button" class="btn btn-inc-dec" (click)="incValDish(i)">+</button>
@@ -152,14 +153,15 @@
               </div>
               <div class="menu__dish-drink-cards">
                 <div class="menu__dish-drink-card" *ngIf="!editToggle">
-                  <ul class="menu__dish-drink-list" *ngFor="let drink of sortedDrinks; let j = index">
-                    <li class="item-title">{{drink.name}}</li>
-                    <li>{{drink.category}}</li>
-                    <li><b>Описание: </b>{{drink.description}}</li>
-                    <li><b>Цена: </b>{{drink.price}}</li>
-                    <li><b>Объем: </b>{{drink.volume}}</li>
-                    <li class="last-item"><b>Цена за бутылку: </b>{{drink.priceOfBottle}}</li>
-                    <li class="inc-dec__item">
+                  <ul class="menu__dish-drink-list"  *ngFor="let drink of sortedDrinks; let j = index">
+<!--                    style="background: url('https://recept-borscha.ru/wp-content/uploads/e/5/5/e553c4afca5f1895f309de671a2167fb.jpeg') no-repeat center ; background-size: cover;"-->
+                    <li class="with-back item-title">{{drink.name}}</li>
+                    <li class="with-back">{{drink.category}}</li>
+                    <li class="with-back"><b>Описание: </b>{{drink.description}}</li>
+                    <li class="with-back"><b>Цена: </b>{{drink.price}}</li>
+                    <li class="with-back"><b>Объем: </b>{{drink.volume}}</li>
+                    <li class="with-back last-item"><b>Цена за бутылку: </b>{{drink.priceOfBottle}}</li>
+                    <li class="with-back inc-dec__item">
                       <button type="button" class="btn btn-inc-dec" [disabled]="sortedDrinks[j].amount == 0" (click)="decValDrink(j)">-</button>
                       <input class="input-to-basket" type="text" [(ngModel)]="sortedDrinks[j].amount">
                       <button type="button" class="btn btn-inc-dec" (click)="incValDrink(j)">+</button>
@@ -243,7 +245,7 @@
                       <small>Заполните поле</small>
                     </div>
                   </div>
-                  <button class="btn" type="submit" [disabled]="drinkForm.invalid">Добавить</button>
+                  <button class="btn" type="submit" (click)="addDrnk()" [disabled]="drinkForm.invalid">Добавить</button>
 
                 </div>
               </div>

@@ -13,14 +13,20 @@
           <li class="header__item">
             <a [routerLink]="['/']" class="header__link">Главная</a>
           </li>
-          <li class="header__item">
+          <li class="header__item" *ngIf="role != 'deliveryman'">
             <a [routerLink]="['/restaurants']" class="header__link">Выбор ресторана</a>
           </li>
           <li class="header__item" *ngIf="role == 'admin'">
             <a href="#" class="header__link" [routerLink]="['/userspage']">Пользователи</a>
           </li>
-          <li class="header__item" *ngIf="isAuth()">
+          <li class="header__item" *ngIf="isAuth() && role != 'deliveryman'">
             <a href="#" class="header__link" [routerLink]="['/orders']">Заказы</a>
+          </li>
+          <li class="header__item" *ngIf="role == 'deliveryman'">
+            <a href="#" class="header__link" [routerLink]="['/courierorders']">Текущие Заказы</a>
+          </li>
+          <li class="header__item" *ngIf="role == 'deliveryman'">
+            <a href="#" class="header__link" [routerLink]="['/ordersarchieve']">Архив</a>
           </li>
           <li class="header__item" *ngIf="!isAuth(); else authorized">
             <a [routerLink]="['/login']" class="header__link">Вход</a>

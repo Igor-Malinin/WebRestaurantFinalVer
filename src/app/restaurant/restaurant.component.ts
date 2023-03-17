@@ -17,7 +17,7 @@ import {OrdersService} from "../services/orders.service";
 export class RestaurantComponent implements OnInit {
 
   restaurantId: number
-  restaurant: Restaurant = new Restaurant()
+  restaurant: any = new Restaurant()
   dishesCategories: string[] = []
   drinksCategories: string[] = []
   currentDishes: Dish[] = []
@@ -57,24 +57,39 @@ export class RestaurantComponent implements OnInit {
     this.route.params.subscribe({
       next: (params: Params) => {
         this.restaurantId = +params['id']
+        this.restaurant = this.restaurantsService.getById(this.restaurantId)
+        this.currentDishes = this.menuService.dishes
+        this.currentDrinks = this.menuService.drinks
+        for (let i = 0; i < this.currentDishes.length; i++) {
+          this.currentDishes[i] = {...this.currentDishes[i], ...{amount: 0}}
+        }
+        for (let i = 0; i < this.currentDrinks.length; i++) {
+          this.currentDrinks[i] = {...this.currentDrinks[i], ...{amount: 0}}
+        }
+        this.sortedDishes = this.currentDishes
+        this.sortedDrinks = this.currentDrinks
+        this.dishesCategories.push(this.currentDishes[0]?.category)
+        this.drinksCategories.push(this.currentDrinks[0]?.category)
+        this.amount.length = this.currentDishes.length + this.currentDrinks.length
+        this.amount.fill(0)
         this.restaurantsService.getRestaurant(this.restaurantId).subscribe({
           next: (msg) => {
             console.log(JSON.parse(String(msg.body)))
-            this.restaurant = JSON.parse(String(msg.body))
-            this.currentDishes = this.restaurant.menu.dishes
-            this.currentDrinks = this.restaurant.menu.drinks
-            for (let i = 0; i < this.currentDishes.length; i++) {
-              this.currentDishes[i] = {...this.currentDishes[i], ...{amount: 0}}
-            }
-            for (let i = 0; i < this.currentDrinks.length; i++) {
-              this.currentDrinks[i] = {...this.currentDrinks[i], ...{amount: 0}}
-            }
-            this.sortedDishes = this.currentDishes
-            this.sortedDrinks = this.currentDrinks
-            this.dishesCategories.push(this.currentDishes[0]?.category)
-            this.drinksCategories.push(this.currentDrinks[0]?.category)
-            this.amount.length = this.currentDishes.length + this.currentDrinks.length
-            this.amount.fill(0)
+            // this.restaurant = JSON.parse(String(msg.body))
+            // this.currentDishes = this.restaurant.menu.dishes
+            // this.currentDrinks = this.restaurant.menu.drinks
+            // for (let i = 0; i < this.currentDishes.length; i++) {
+            //   this.currentDishes[i] = {...this.currentDishes[i], ...{amount: 0}}
+            // }
+            // for (let i = 0; i < this.currentDrinks.length; i++) {
+            //   this.currentDrinks[i] = {...this.currentDrinks[i], ...{amount: 0}}
+            // }
+            // this.sortedDishes = this.currentDishes
+            // this.sortedDrinks = this.currentDrinks
+            // this.dishesCategories.push(this.currentDishes[0]?.category)
+            // this.drinksCategories.push(this.currentDrinks[0]?.category)
+            // this.amount.length = this.currentDishes.length + this.currentDrinks.length
+            // this.amount.fill(0)
           },
           error: (err) => {
             console.log('error', err)
@@ -241,6 +256,7 @@ export class RestaurantComponent implements OnInit {
       })
     }
     if (this.drinkForm.valid) {
+      console.log('here')
       const newDrink = {...this.drinkForm.value}
       this.restaurantsService.addDrink(this.restaurantId, newDrink).subscribe({
         next: (msg) => {
@@ -260,6 +276,23 @@ export class RestaurantComponent implements OnInit {
     //
     //   this.ordersService.addOrder()
     // }
+  }
+
+  addDrnk() {
+    const newDrink = {...this.drinkForm.value}
+    this.restaurantsService.addDrink(this.restaurantId, newDrink).subscribe({
+      next: (msg) => {
+        console.log(msg)
+      },
+      error: (err) => {
+        console.log('error', err)
+      },
+      complete: () => {
+        setTimeout(() => {
+          window.location.reload()
+        }, 10)
+      }
+    })
   }
 
   showInfo() {

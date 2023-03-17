@@ -1,0 +1,40 @@
+@use "src/styles";
+
+
+
+.main-style-box {
+  margin-bottom: 30px;
+}
+
+.order-elem {
+  display: flex;
+  margin-bottom: 10px;
+  align-items: center;
+}
+
+.order-elem:last-child {
+  margin-bottom: 0;
+}
+
+.info-status-flex {
+  display: flex;
+  justify-content: space-between;
+}
+
+.btn {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  box-shadow: inset 0 0 20px 6px styles.$back-color-dark;
+  background: styles.$back-color-light;
+  img {
+    width: 30px;
+  }
+}
+
+.statuses {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+

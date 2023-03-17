@@ -1,1 +1,42 @@
-<p>courier-orders works!</p>
+<div class="wrapper">
+  <div class="paige__container">
+    <div class="active-orders">
+      <div class="main-style-box" *ngFor="let order of getOrders()">
+        <div class="info-status-flex">
+          <div class="info">
+            <div class="order-elem">
+              <small style="width: 150px">Номер заказа:</small>
+              <small>{{order.id + 1}}</small>
+            </div>
+            <div class="order-elem">
+              <small style="width: 150px">Поступил:</small>
+              <small>{{order.orderedTime | date:'dd.MM.yyyy hh:mm'}}</small>
+            </div>
+            <div class="order-elem">
+              <small style="width: 150px">Доставить до:</small>
+              <small>{{order.orderedTime | date:'dd.MM.yyyy hh:mm'}}</small>
+            </div>
+            <div class="order-elem">
+              <small style="width: 150px">Адрес:</small>
+              <small>{{order.address}}</small>
+            </div>
+          </div>
+          <div class="statuses">
+            <div class="order-elem">
+              <small style="width: 70px">Статус:</small>
+              <button class="btn"><small>{{order.isDone}}</small> <img src="https://cdn0.iconfinder.com/data/icons/flat-round-arrow-arrow-head/512/Red_Arrow_Down-2-1024.png"></button>
+            </div>
+            <div class="order-elem">
+              <small style="width: 70px">Сумма:</small>
+              <small>{{order.price}}</small>
+            </div>
+          </div>
+
+
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

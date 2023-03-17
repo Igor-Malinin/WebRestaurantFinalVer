@@ -34,7 +34,7 @@ export class RestaurantsService {
     private cookieService: CookieService
   ) { }
 
-  getById(id: number) {
+  getById(id: number): Restaurant | undefined {
     return this.restaurants.find(r => r.id === id)
   }
 

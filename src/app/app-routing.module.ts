@@ -13,6 +13,8 @@ import {ReferenceComponent} from "./reference/reference.component";
 import {ContactsComponent} from "./contacts/contacts.component";
 import {CheckoutOrderComponent} from "./checkout-order/checkout-order.component";
 import {BasketComponent} from "./basket/basket.component";
+import {CourierOrdersComponent} from "./courier-orders/courier-orders.component";
+import {OrdersArchieveComponent} from "./orders-archieve/orders-archieve.component";
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -27,6 +29,8 @@ const routes: Routes = [
   {path: 'contacts', component: ContactsComponent},
   {path: 'checkoutorder', component: CheckoutOrderComponent},
   {path: 'basket', component: BasketComponent},
+  {path: 'courierorders', component: CourierOrdersComponent},
+  {path: 'ordersarchieve', component: OrdersArchieveComponent},
 
   {path: 'error', component: ErrorPageComponent},
   {path: '**', redirectTo: '/error'}

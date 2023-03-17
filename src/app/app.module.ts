@@ -20,6 +20,7 @@ import { ContactsComponent } from './contacts/contacts.component';
 import { CheckoutOrderComponent } from './checkout-order/checkout-order.component';
 import { BasketComponent } from './basket/basket.component';
 import { CourierOrdersComponent } from './courier-orders/courier-orders.component';
+import { OrdersArchieveComponent } from './orders-archieve/orders-archieve.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { CourierOrdersComponent } from './courier-orders/courier-orders.componen
     ContactsComponent,
     CheckoutOrderComponent,
     BasketComponent,
-    CourierOrdersComponent
+    CourierOrdersComponent,
+    OrdersArchieveComponent
   ],
   imports: [
     BrowserModule,

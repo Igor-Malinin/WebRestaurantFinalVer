@@ -161,6 +161,10 @@
 }
 
 .menu__dish-drink-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
   width: 300px;
   padding: 15px 10px;
   background-color: styles.$back-color-dark;
@@ -205,6 +209,15 @@
   font-size: 45px;
   font-weight: 500;
   padding: 5px 20px;
+}
+
+.with-back {
+  width: fit-content;
+  padding: 8px;
+
+  background-color: rgba(34, 34, 34, 0.8);
+  //border: 2px solid styles.$border-color-superlightgrey;
+  border-radius: 10px;
 }
 
 .add-dish-drink-field {

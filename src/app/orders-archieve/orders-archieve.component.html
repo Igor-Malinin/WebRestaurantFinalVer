@@ -1,0 +1,45 @@
+<div class="wrapper">
+  <div class="paige__container">
+    <div class="active-orders">
+      <div class="main-style-box" *ngFor="let order of getOrders()">
+        <div class="info-status-flex">
+          <div class="info">
+            <div class="order-elem">
+              <small style="width: 150px">Номер заказа:</small>
+              <small>{{order.id + 1}}</small>
+            </div>
+            <div class="order-elem">
+              <small style="width: 150px">Поступил:</small>
+              <small>{{order.orderedTime | date:'dd.MM.yyyy hh:mm'}}</small>
+            </div>
+            <div class="order-elem">
+              <small style="width: 150px">Доставить до:</small>
+              <small>{{order.orderedTime | date:'dd.MM.yyyy hh:mm'}}</small>
+            </div>
+            <div class="order-elem">
+              <small style="width: 150px">Адрес:</small>
+              <small>{{order.address}}</small>
+            </div>
+          </div>
+          <div class="statuses">
+            <div class="order-elem">
+              <small style="width: 70px">Статус:</small>
+              <small [ngClass]="{
+              green: order.isDone == 'Доставлен',
+              red: order.isDone == 'Отменен'
+              }">{{order.isDone}}</small>
+            </div>
+            <div class="order-elem">
+              <small style="width: 70px">Сумма:</small>
+              <small>{{order.price}}</small>
+            </div>
+          </div>
+
+
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
